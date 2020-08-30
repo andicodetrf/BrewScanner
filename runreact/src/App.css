@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,20 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.landing-bg{
+  background-image: url('./components/beercheers.jpg');
+  background-repeat: no-repeat;
+  /* background-size: 100% 100%; */
+  height:100vh;
+  /* width: 100%;  */
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* width: 75vw; */
+  background-size: cover;
+  /* object-fit: cover; */
+  background-position: center;
 }

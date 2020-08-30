@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Navigation from "./components/Navigation";
+import Landing from "./components/Landing";
 import Axios from "axios";
 // import AddItem from "./components/items/AddItem";
 import { decode } from "jsonwebtoken";
@@ -140,7 +141,8 @@ class App extends Component{
         <Navigation user={user} logout={this.logoutHandler}/>
         {errorMessage && <Alert>{errorMessage}</Alert>}
         <Switch>
-          <PrivateRoute exact path="/" isAuth={isAuth} component={Home} />
+        <PrivateRoute exact path="/" isAuth={isAuth} component={Home} /> 
+        
           {/* <PrivateRoute
             exact
             path="/item/add"
@@ -167,6 +169,14 @@ class App extends Component{
             exact
             render={() =>
               isAuth ? <Redirect to="/" /> : <Login login={this.loginHandler} />
+            }
+          />
+
+          <Route
+            path="/landing"
+            exact
+            render={() =>
+              isAuth ? <Redirect to="/" /> : <Landing />
             }
           />
         </Switch>

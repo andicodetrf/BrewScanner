@@ -22,10 +22,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+      },
+    isUser: {
+        type: Boolean,
+        default: true
+    },  
+    hasPurchased: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Transaction"
+    },
     favorites: [{
         favItem: String,
         favItemPrice: Number,
-    }]
+    }],
 
 }, {timestamps: true})
 

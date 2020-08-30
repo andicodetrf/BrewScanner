@@ -3,9 +3,13 @@ const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
     itemName: String,
-    price: String,
-    origin: String,
-    qty: String
+    itemPrice: String,
+    itemUnit: String,
+    itemImgURL: String,
+    itemFrom: String,
+    itemOriURL: String,
+    itemID: String,
+    itemQty: String
 }, {timestamps: true})
 
 

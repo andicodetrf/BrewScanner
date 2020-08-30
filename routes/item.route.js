@@ -112,14 +112,6 @@ router.get('/', checkToken, async(req,response) => {
         // let item = new Item(req.body);
         // // if(item.name)
         // let savedItem = await item.save()
-
-        // let ntucPrices = []
-        // let ntucNames = []
-        // let ntucPackagings = []
-        // let ntucImgURLs = []
-        // let ntucProductURLs = []
-
-        // let ntucShop = []
         
         Axios.get("https://www.fairprice.com.sg/category/beer")
         .then((res) => {
@@ -224,7 +216,8 @@ router.get('/', checkToken, async(req,response) => {
                     itemPrice: ntucPrices[i],
                     itemImgURL: ntucImgURLs[i],
                     itemFrom: "FairPrice",
-                    itemOriURL: `https://www.fairprice.com.sg${ntucProductURLs[i]}`
+                    itemOriURL: `https://www.fairprice.com.sg${ntucProductURLs[i]}`,
+                    itemID: ntucProductURLs[i].substring(9)
                 }
 
                 items.push(item)
@@ -249,6 +242,7 @@ router.get('/', checkToken, async(req,response) => {
                     let productName = $(".product_name");
                     let productPrice = $(".price_normal");
                     let productURL = $(".product_box");
+                    let productBrand = $(".product_category_name");
                     
 
                     let csPrices = []
@@ -259,17 +253,30 @@ router.get('/', checkToken, async(req,response) => {
                     
                     // console.log(productImg[29].children[0].next.children[0].next.children[0].next.attribs.src)
 
-                    // console.log(productURL[0].children[1].attribs.href)
+                     // console.log(productURL[0].children[1].attribs.href)
+                    // console.log(productBrand[0].children[0].children[0].data) //product brand
+                    // console.log(productName[0].children[0].data.trim())
+                    // console.log(productBrand[0].children[0].next.attribs.class) //product brand
+                    // console.log(productBrand[0].children[0].next.children[0].children[0].data)
+                    // console.log(productBrand.length)
                     
                     
                     for (let i = 0; i < y.length; i++) {
                         
-                        // check.push(y[i].children[0].children[0].children[0].children[0].children[0].src)
+                        if(productBrand[i].children[0].next.attribs.class === 'category-name'){
+                            csNames.push(
+                            
+                                `${productBrand[i].children[0].next.children[0].children[0].data} ${productName[i].children[0].data.trim()}`
+                            );
+                        }else{
+                            csNames.push(
+                                productName[i]
+                                .children[0]
+                                .data.trim()
+                                
+                            )
+                        }
 
-                        csNames.push(productName[i]
-                            .children[0]
-                            .data.trim()
-                        );
                         csPrices.push(productPrice[i]
                             .children[0]
                             .data.slice(1)
@@ -286,6 +293,8 @@ router.get('/', checkToken, async(req,response) => {
                             .attribs
                             .href
                         );
+                        
+
 
 
 
@@ -310,7 +319,9 @@ router.get('/', checkToken, async(req,response) => {
                             itemUnit: lastword,
                             itemPrice: csPrices[i],
                             itemImgURL: csImgURLs[i],
+                            itemFrom: 'Cold Storage',
                             itemOriURL: `https://coldstorage.com.sg${csProductURLs[i]}`,
+                            itemID: csProductURLs[i].substring(1)
                         }
                 
                         items.push(item1)
@@ -320,12 +331,13 @@ router.get('/', checkToken, async(req,response) => {
                                     itemUnit: 'NA',
                                     itemPrice: csPrices[i],
                                     itemImgURL: csImgURLs[i],
+                                    itemFrom: 'Cold Storage',
                                     itemOriURL: `https://coldstorage.com.sg${csProductURLs[i]}`,
+                                    itemID: csProductURLs[i]
                                 }
                         items.push(item2)
                     }
                 
-                        
                 }
             
                 console.log(items)

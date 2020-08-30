@@ -87,140 +87,19 @@ app.use('/api/auth', require('./routes/auth.route'))
 //     .catch(err => console.log(err))
 
 
-// Axios.get("https://coldstorage.com.sg/meat-seafood")
-//                         .then(resp => {
-//                             // get
-//                             let $ = cheerio.load(resp.data);
-//                             //returns an object of objects of the first some number loaded items
-//                             let productName = $(".product_name");
-//                             let productPrices = $(".price_normal");
-//                             // let productDesc = $(".product_desx");
-//                             // console.log(productDesc);
-//                             // console.log("length of received products", x.length);
-//                             let names = [];
-//                             let prices = [];
-//                             for (let i = 0; i < productName.length; i++) {
-//                                 names.push(productName[i]
-//                                     .children[0]
-//                                     .data.trim()
-//                                 );
-//                                 prices.push(productPrices[i]
-//                                     .children[0]
-//                                     .data
-//                                 );
-//                             }
-//                             console.log(names);
-//                             console.log(prices);
-
-//                             })
-//                             .catch((err) => {
-//                                 console.log(err);
-//                               });
-
-
-    // Axios.get("https://coldstorage.com.sg/beers-wines-spirits/beer-cider")
-    //         .then((resCS) => {
-    //                 // get
-    //                 let $ = cheerio.load(resCS.data);
-    //                 //returns an object of objects of the first some number loaded items
-    //                 let y = $(".product_box");
-    //                 let productImg = $(".product_images");
-    //                 let productName = $(".product_name");
-    //                 let productPrice = $(".price_normal");
-    //                 let productURL = $(".product_box");
-                    
-
-    //                 let csPrices = []
-    //                 let csNames = []
-    //                 let csImgURLs = []
-    //                 let csProductURLs = []
-
-                    
-    //                 // console.log(productImg[29].children[0].next.children[0].next.children[0].next.attribs.src)
-
-    //                 // console.log(productURL[0].children[1].attribs.href)
-                    
-                    
-    //                 for (let i = 0; i < y.length; i++) {
-                        
-    //                     // check.push(y[i].children[0].children[0].children[0].children[0].children[0].src)
-
-    //                     csNames.push(productName[i]
-    //                         .children[0]
-    //                         .data.trim()
-    //                     );
-    //                     csPrices.push(productPrice[i]
-    //                         .children[0]
-    //                         .data.slice(1)
-    //                     );
-    //                     csImgURLs.push(productImg[i]
-    //                         .children[0]
-    //                         .next.children[0]
-    //                         .next.children[0]
-    //                         .next.attribs
-    //                         .src
-    //                     );
-    //                     csProductURLs.push(productURL[i]
-    //                         .children[1]
-    //                         .attribs
-    //                         .href
-    //                     );
+        // Axios.get("https://redmart.lazada.sg/shop-groceries-wines-beers-spirits-beer/?spm=a2o42.lazmart_channel.nav_category_tree.160.447b48a6JXGID6&scm=1003.4.icms-zebra-100648641-4240157.OTHER_6017481070_3893702&m=redmart")
+        // Axios.get('https://shopee.sg/Alcoholic-Beverages-cat.169.14255')
+        // .then((res) => {
+        //     console.log(res.data);
+        //     let $ = cheerio.load(res.data);
+            // let x = $("#root"); 
+            // console.log(x._root[0].children[1].children[2].children[25].next.children)
+            // console.log(x)
+        // })
+      
 
 
 
-    //                 }
-    //         console.log(csNames);
-    //         console.log(csPrices.length);
-    //         console.log(csImgURLs.length);
-    //         console.log(csProductURLs.length);
-
-
-    //         //numStarts
-    //         let obj = [
-
-    //         ]
-         
-    //         let splitspace = csNames.map((a) => a.split(' '))
-    //         for(let i =0; i < splitspace.length; i++){
-    //         //     console.log(splitspace[i].length)
-                
-    //             let lastword = splitspace[i][(splitspace[i].length-1)]
-    //             if(parseInt(lastword[0])>0){
-    //                 let item1 = {
-    //                     itemName: splitspace[i].slice(0,[(splitspace[i].length-1)]).join(' '),
-    //                     itemUnit: lastword,
-    //                     itemPrice: csPrices[i],
-    //                     itemImgURL: csImgURLs[i],
-    //                     itemOriURL: `https://coldstorage.com.sg${csProductURLs[i]}`,
-    //                 }
-            
-    //                 obj.push(item1)
-    //             } else {
-    //                 let item2 = {
-    //                             itemName: splitspace[i].join(' '),
-    //                             itemUnit: 'NA',
-    //                             itemPrice: csPrices[i],
-    //                             itemImgURL: csImgURLs[i],
-    //                             itemOriURL: `https://coldstorage.com.sg${csProductURLs[i]}`,
-    //                         }
-    //                 obj.push(item2)
-    //             }
-            
-                    
-    //         }
-            
-    //         console.log(obj)
-
-
-
-    //         // response.status(200).json({
-    //         //     // count: items.length,
-    //         //     message: 'get all Items Success',
-    //         //     items, 
-    //         //     // names,
-    //         //     // prices
-    //         })
-        
 
 //===== 404 errors
 app.get("*", (req,res) => {

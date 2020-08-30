@@ -1,19 +1,32 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-        orders: [
-                    { itemName: "", 
-                      qty: "", 
-                      origin: "url", 
-                      price: "price"
-                    }
-                ], 
-          total: 0, 
-          paid: false,
-          status: false, //for open or closed
+          orders: [
+                      { itemName: String, 
+                        itemQty: Number, 
+                        itemOrigin: String, 
+                        itemPrice: Number
+                      }
+                  ], 
+
+          orderTotal: Number,
+
+          isPaid: {
+            type: Boolean,
+            default: false
+          },  
+          orderStatus: {
+            type: Boolean,
+            default: false
+          },  
+          purchasedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+          },
+          
 }, {timestamps: true})
 
 
-const User = mongoose.model('User', userSchema)
+const Transaction = mongoose.model('Transaction', transactionSchema)
 
-module.exports = User;
+module.exports = Transaction;
