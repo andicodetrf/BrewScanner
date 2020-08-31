@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
-import {Container, Button, Row, Col, Card, FormControl, Badge} from "react-bootstrap"
+import {Container, Button, Row, Col, Card, FormControl, Badge, Pagination} from "react-bootstrap"
 // import cheerio from 'cheerio'
 
 
@@ -21,19 +21,9 @@ class Home extends Component {
         highestToggle: false,
         currentPage: 1,
         itemsPerPage: 12,
-        pageNumbers:[],
       };
 
-      pagination = () => {
-        let totalPages = []
-        for(let i = 1; i<=Math.ceil((this.state.items.length)/this.state.itemsPerPage); i++){
-          totalPages.push(i)
-        }
-        if(totalPages.length>0){
-        this.setState({pageNumbers: totalPages})
-        }
-      }
-      
+
       fetchItems = () => {
 
         let token = localStorage.getItem("token");
@@ -67,7 +57,7 @@ class Home extends Component {
       if(items && DaysDiff < 2){
         items = JSON.parse(items)  
         console.log(DaysDiff) 
-        this.setState({ items },() => {console.log(this.state.items); this.pagination(); });
+        this.setState({ items },() => {console.log(this.state.items) });
         
       } else{
         this.fetchItems();
@@ -198,30 +188,44 @@ class Home extends Component {
        
         }
 
- 
-      
+        paginate = (pgNum) => {
+          this.setState({currentPage: pgNum})
+        }
 
     render() {
 
       let {currentPage, itemsPerPage} = this.state
 
-      const indexOfLastItem = currentPage * itemsPerPage
-      const indexOfFirstItem = indexOfLastItem - itemsPerPage
-      const currentItems = this.state.items.slice(indexOfFirstItem, indexOfLastItem)
-
-
       const displayList = 
       (this.state.isFilterSupp && this.state.searchKey === "") ? this.state.suppFilteredList :  
           ((this.state.filteredList.length > 0) ? this.state.filteredList : (this.state.displaySort.length> 0 ? this.state.displaySort :  this.state.items ))
-            
+
+      const indexOfLastItem = currentPage * itemsPerPage
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage
+      const currentItemsList = displayList.slice(indexOfFirstItem, indexOfLastItem)
+
+      let totalPages = []
+      for(let i = 1; i<=Math.ceil((displayList.length)/itemsPerPage); i++){
+        totalPages.push(i)
+      }
       
         return (
             <div style={{margin: "0 50px"}}>
                 
                 <Container fluid>
-                  {this.state.pageNumbers.map((pg,idx) => 
-                      <li>{pg}</li>
+                  <nav>
+                  <ul className="pagination">
+                    {totalPages.map((pg,idx) => (
+                    
+                      <li key={pg}  className="page-item">
+                          <a className="page-link" href="#" onClick={()=>this.paginate(pg)}> {pg}</a>
+                      </li>
+                    )
+                      
+                        
                   )}
+                  </ul>
+                  </nav>
 
                   <Row className="my-4">
                     <Col md={{ span: 4, offset: 5 }}>
@@ -271,7 +275,8 @@ class Home extends Component {
                   <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px black"}} >
                 
                   {(this.state.searchError) ? this.state.searchError :
-                    displayList.map(item => (
+                    currentItemsList.map(item => (
+                    // displayList.map(item => (
                             <Col key={item.itemID} md="4">
                                 <Card  className="mb-3" style={{height: "24em"}}>
                                 <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain"}}/>
