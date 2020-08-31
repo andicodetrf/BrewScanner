@@ -15,6 +15,7 @@ class Home extends Component {
         isFilterSupp: false,
         searchKey: "",
         suppDisabled: false,
+        searchError: "",
       };
 
 
@@ -61,18 +62,15 @@ class Home extends Component {
 
     //for filter
     searchList = (e) =>{
-      
         console.log(e.target.value);
         this.setState({ searchKey: e.target.value });
 
         let matches;
         if(this.state.isFilterSupp){
-
             matches =  this.state.suppFilteredList.filter(m => {
               const regex = new RegExp(`${e.target.value}`, 'gi')
               return m.itemName.match(regex) 
-          })
-
+             })
 
         } else {
             this.setState({suppDisabled : true })
@@ -88,9 +86,14 @@ class Home extends Component {
         if(e.target.value.length === 0){
           this.setState({ filteredList: [] });
           this.setState({suppDisabled : false })
-
+          this.setState({searchError: ""})
         } else {
           this.setState({ filteredList: matches });
+            if(matches.length === 0){
+              this.setState({searchError: "Not Found"})
+            } else {
+              this.setState({searchError: ""})
+            }
         }
     }
 
@@ -120,6 +123,8 @@ class Home extends Component {
       this.setState({ filteredList: [] });
       this.setState({ searchKey: '' });
       this.setState({ suppDisabled: false });
+      this.setState({ searchError: '' });
+
     }
 
 
@@ -179,31 +184,31 @@ class Home extends Component {
                   <Col md="10">
                   
                   <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px black"}} >
-                  
-                  
-
-                  {displayList.map(item => (
-                          <Col key={item.itemID} md="4">
-                              <Card  className="mb-3" style={{height: "24em"}}>
-                              <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain"}}/>
-                                  <Card.Body className="text-sm">
-                                      {item.itemName}
-                                      <div>
-                                      {item.itemUnit}
-                                      </div>
-                                      <div>
-                                      ${item.itemPrice}
-                                      </div>
-                                      <div>
-                                      Supplied By: {item.itemFrom}
-                                      </div>
-                                      <div>
-                                        <a href={item.itemOriURL} target="_blank">Visit {item.itemFrom}</a>
-                                      </div>
-                                  </Card.Body>
-                              </Card>
-                          </Col>
-                  ))}
+                
+                  {(this.state.searchError) ? this.state.searchError :
+                    displayList.map(item => (
+                            <Col key={item.itemID} md="4">
+                                <Card  className="mb-3" style={{height: "24em"}}>
+                                <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain"}}/>
+                                    <Card.Body className="text-sm">
+                                        {item.itemName}
+                                        <div>
+                                        {item.itemUnit}
+                                        </div>
+                                        <div>
+                                        ${item.itemPrice}
+                                        </div>
+                                        <div>
+                                        Supplied By: {item.itemFrom}
+                                        </div>
+                                        <div>
+                                          <a href={item.itemOriURL} target="_blank">Visit {item.itemFrom}</a>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                    ))
+                  }
                   
 
                   </Row>
