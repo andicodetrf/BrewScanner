@@ -28,8 +28,6 @@ class App extends Component{
     user: null,
   };
 
-
-
   getUserProfile = (token) => {
     Axios.get(`${URL}/auth/user`, {
       headers: {
