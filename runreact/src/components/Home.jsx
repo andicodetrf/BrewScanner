@@ -16,9 +16,23 @@ class Home extends Component {
         searchKey: "",
         suppDisabled: false,
         searchError: "",
+        displaySort: [],
+        lowestToggle: false,
+        highestToggle: false,
+        currentPage: 1,
+        itemsPerPage: 12,
+        pageNumbers:[],
       };
 
-
+      pagination = () => {
+        let totalPages = []
+        for(let i = 1; i<=Math.ceil((this.state.items.length)/this.state.itemsPerPage); i++){
+          totalPages.push(i)
+        }
+        if(totalPages.length>0){
+        this.setState({pageNumbers: totalPages})
+        }
+      }
       
       fetchItems = () => {
 
@@ -53,17 +67,18 @@ class Home extends Component {
       if(items && DaysDiff < 2){
         items = JSON.parse(items)  
         console.log(DaysDiff) 
-        this.setState({ items },() => {console.log(this.state.items)});
+        this.setState({ items },() => {console.log(this.state.items); this.pagination(); });
         
       } else{
         this.fetchItems();
       }
+      
     }
 
     //for filter
     searchList = (e) =>{
         console.log(e.target.value);
-        this.setState({ searchKey: e.target.value });
+        this.setState({ searchKey: e.target.value, lowestToggle: false, highestToggle: false });
 
         let matches;
         if(this.state.isFilterSupp){
@@ -97,18 +112,20 @@ class Home extends Component {
         }
     }
 
+    
 
     filterSupp = (e) => {
       console.log(e.target.name);
      
-      this.setState({ filterBy: e.target.name, isFilterSupp: true });
+      this.setState({ filterBy: e.target.name, isFilterSupp: true, lowestToggle: false, highestToggle: false });
       
-        let matches =  this.state.items.filter(m => {
+      let matches =  this.state.items.filter(m => {
           const regex = new RegExp(`${e.target.name}`, 'gi')
           return m.itemFrom.match(regex)
       })
 
-      // console.log(matches)
+      
+        
 
       if(matches.length>0){
         this.setState({ suppFilteredList: matches });
@@ -128,21 +145,88 @@ class Home extends Component {
     }
 
 
+    // filterBy:"", suppFilteredList:[]
+    showLowestHandler = (e) => {
+      this.setState({
+        lowestToggle : true, 
+        highestToggle: false, 
+      }, ()=> this.displaySortFn())
+    }
+
+    showHighestHandler = (e) => {
+      this.setState({
+        highestToggle : true, 
+        lowestToggle: false, 
+      }, ()=> this.displaySortFn())
+    }
+
+    displaySortFn = () => {
+      this.setState({
+        isFilterSupp: false,
+        filterBy:"", 
+        suppFilteredList:[]
+      })
+      
+        if(this.state.lowestToggle){
+          let temp = [...this.state.items]
+          temp.sort((a,b) => Number(a.itemPrice) - Number(b.itemPrice))
+          console.log(temp)
+          this.setState({
+            displaySort : temp,
+          })
+        } 
+
+        if(this.state.highestToggle){ 
+          let temp = [...this.state.items]
+          temp.sort((a,b) => Number(b.itemPrice) - Number(a.itemPrice))
+          console.log(temp)
+          this.setState({
+            displaySort: temp, 
+          })
+        
+        } 
+      
+        }
+
+        clearSortHandler = () => {
+
+          this.setState({
+            lowestToggle: false,
+            highestToggle: false,
+            displaySort : []
+          })
+       
+        }
+
+ 
+      
+
     render() {
+
+      let {currentPage, itemsPerPage} = this.state
+
+      const indexOfLastItem = currentPage * itemsPerPage
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage
+      const currentItems = this.state.items.slice(indexOfFirstItem, indexOfLastItem)
+
 
       const displayList = 
       (this.state.isFilterSupp && this.state.searchKey === "") ? this.state.suppFilteredList :  
-          ((this.state.filteredList.length > 0) ? this.state.filteredList :  this.state.items)
+          ((this.state.filteredList.length > 0) ? this.state.filteredList : (this.state.displaySort.length> 0 ? this.state.displaySort :  this.state.items ))
+            
       
         return (
             <div style={{margin: "0 50px"}}>
                 
                 <Container fluid>
+                  {this.state.pageNumbers.map((pg,idx) => 
+                      <li>{pg}</li>
+                  )}
 
                   <Row className="my-4">
                     <Col md={{ span: 4, offset: 5 }}>
                     
-                        <FormControl type="text" name="filter" pattern="[A-Za-z0-9]" value={this.state.searchKey} placeholder="Search..." onInput={this.searchList}/>
+                        <FormControl type="text" name="filter" pattern="[A-Za-z0-9]" value={this.state.searchKey} placeholder="Search..." onChange={this.searchList}/>
                       
                     </Col>
                   </Row>
@@ -172,8 +256,9 @@ class Home extends Component {
                     <hr />
 
                     <h4>Sort By Price</h4>
-                    <Button variant="outline-danger" className="mr-2">Lowest</Button>
-                    <Button variant="outline-dark">Highest</Button>
+                    <Button variant="outline-danger" className="mr-2" name="lowestToggle" onClick={this.showLowestHandler}>Lowest</Button>
+                    <Button variant="outline-dark" name="highestToggle" onClick={this.showHighestHandler} className="mr-2">Highest</Button>
+                    {this.state.lowestToggle || this.state.highestToggle ? <Button variant="outline-danger" onClick={this.clearSortHandler}>X</Button> : null}
                     <hr />
                     <h4>Filter By Supplier</h4>
                     <Button variant="outline-danger" className="mr-2" name="FairPrice" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>FairPrice</Button>
