@@ -71,16 +71,25 @@ class EditProfile extends Component {
               console.log(err);
             });
     }
-        
-    
-
-    
 
     render() {
+
+        if(this.state.user.birthDate){
+            let d = new Date(this.state.user.birthDate)
+            let bd = d.toDateString().substring(4)
+        // let day = d.getDate()
+        // let month = d.getMonth() + 1
+        // let year = d.getMonth() + 1
+        console.log(bd)
+        // console.log(day)
+        // console.log(month)
+        }
+
+
+
         return (
             <div className="element-outer">
                 <Container>
-                {/* <h1>User Profile</h1> */}
 
                 <Row className="justify-content-md-center">
                     <Col md="5">

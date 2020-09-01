@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import landingImg from './beercheers.jpg'
-import { Container, Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 import Axios from 'axios'
+import './Landing.css'
 
 class Landing extends Component {
 
@@ -33,12 +33,22 @@ class Landing extends Component {
     }
 
     render(){
-        // console.log(this.state)
+        
         return (
             
             <div className="main-landing">
                 <div className="landing-bg">
+
                
+                <div class="typewriter">
+                    <h1>Scanning for your cheapest brew! <i class="fas fa-glass-cheers"></i></h1>
+                </div>
+
+                <div class="none-type">
+                    <h1>Scanning for your cheapest brew! <i class="fas fa-glass-cheers"></i></h1>
+                </div>
+             
+
                     <Card className="qod-card text-dark text-left">
                         <Card.Header>
                         <i className="fas fa-quote-left"></i>
@@ -83,12 +93,6 @@ class Landing extends Component {
                     <div  id="eligible-reg">
                     {this.state.isAbove18 ? 
                     
-                        // <Button variant="outline-warning " className="mt-3 animate__animated animate__slideInUp btn btn-link" > 
-                        //         <Link to="/register" className="">
-                        //             Sign Up
-                        //         </Link>
-                        //     </Button>
-
                             <a href="/register" className="mt-3 animate__animated animate__slideInUp btn btn-outline-warning">Sign Up</a>
                         
                     : null}

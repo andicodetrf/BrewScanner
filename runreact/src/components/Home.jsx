@@ -254,15 +254,15 @@ class Home extends Component {
                   
                       <h6>Searched:</h6>
                       {(this.state.searchKey) ? 
-                      <p className="text-muted small">{this.state.searchKey} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></p>
+                      <Badge variant="warning" className="text-muted" size="sm">{this.state.searchKey} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></Badge>
                       : null
                       }
                     </div>
-
+                    
                     <div>
                       <h6>Filtered:</h6>
                       {(this.state.filterBy) ? 
-                      <p className="text-muted small">{this.state.filterBy} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></p>
+                      <Badge variant="warning" className="text-muted" size="sm">{this.state.filterBy} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></Badge>
                       : null
                       }
                     </div>
@@ -280,7 +280,7 @@ class Home extends Component {
                     <Button variant="outline-danger" className="mr-2 mb-2" id="lowTog" name="lowestToggle" onClick={this.showLowestHandler}><i className="fas fa-sort-down fa-2x"></i></Button>
 
                     <Button variant="outline-dark" className="mb-2" id="highTog" name="highestToggle" onClick={this.showHighestHandler} ><i className="fas fa-sort-up fa-2x"></i></Button>
-                    {this.state.lowestToggle || this.state.highestToggle ? <Button variant="outline-danger" onClick={this.clearSortHandler}>X</Button> : null}
+                    {this.state.lowestToggle || this.state.highestToggle ? <Badge variant="danger" className="ml-2"onClick={this.clearSortHandler} style={{cursor: "pointer"}}>X</Badge> : null}
 
                     
                     </Card.Body>

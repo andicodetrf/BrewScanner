@@ -1,0 +1,63 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,700;1,400&display=swap');
+
+
+.typewriter h1 {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .1em; /* Adjust as needed */
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+      background: rgba(91, 88, 88, 0.8);
+      color: white;
+      font-size: 2rem;
+      font-family: 'Anonymous Pro', monospace;
+      /* padding-left: 20px; */
+      padding: 5px 20px;
+      border-radius: 2px;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color:white; }
+  }
+
+
+.none-type h1{
+    font-size: 1rem;
+    background: rgba(91, 88, 88, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+  @media only screen and (max-width: 730px) {
+    .typewriter h1 {
+        font-size: 1.5rem;
+
+    }
+  }
+
+  @media only screen and (max-width: 553px) {
+    .typewriter h1 {
+        visibility: hidden;
+
+    }
+  }
+
+  @media only screen and (min-width: 553px) {
+    .none-type h1 {
+        visibility: hidden;
+    }
+  }

@@ -16,14 +16,6 @@ export default class Login extends Component {
 
 
     childLoginHandler = () => {
-        // axios.post(`${URL}/auth`, this.state)
-        // .then((res) => {
-        //     console.log(res.data)
-        
-        // })
-        // .catch((err) => {
-        //     console.log(err)
-        // })
         console.log(this.state)
         this.props.login(this.state)
     }
@@ -31,14 +23,16 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Login</h1>
+            <div className="login-main">
+                
                 <Container>
                 <Row className="justify-content-md-center">
                 <Col md="5">
-
+                
+                <Row className="mb-4 mt-4">
+                <h1>Login</h1>
+                </Row>
                 <Row className="mb-4">
-                    
                 <Form.Label>Email</Form.Label>
                     <Form.Control 
                         name ="email" 

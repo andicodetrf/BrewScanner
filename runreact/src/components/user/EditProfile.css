@@ -1,13 +1,19 @@
+
+
 .element-outer{
-    background-color:#e0e0e0;
+    background-color:#d6d6d6;
     height: 89vh;
-  }
+    padding: 30px;
+  }  
   
-  .element {
+
+.element {
     align-items: center;
-    box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),
-      -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
-    border-radius: 30px;
+    box-shadow: 5px 5px 10px #b6b6b6,-5px -5px 10px #f6f6f6;
+
+    /* box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),
+      -12px -12px 24px 0 rgba(255, 255, 255, 0.5); */
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -15,5 +21,36 @@
     font-size: 1.5rem;
     margin: 20px auto;
     width: 300px;
-    background: #e0e0e0;
+    background: #d6d6d6;
   }
+
+.element-btn{
+  border-radius: 10px;
+  background: #d6d6d6;
+  box-shadow: 5px 5px 10px #b6b6b6,-5px -5px 10px #f6f6f6;
+
+  padding: 1.5rem;
+  
+  margin: 30px auto;
+  
+}
+
+/* 
+.element-btn-pressed{
+  border-radius: 10px;
+  background: #d6d6d6;
+  box-shadow: inset 20px 5px 60px #b6b6b6, 
+              inset -20px -40px 60px #f6f6f6;
+            padding: 1.5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            margin: 30px auto;
+} */
+  
+
+  /* border-radius: 50px;
+background: #4b5053;
+box-shadow:  20px 20px 60px #404447, 
+             -20px -20px 60px #565c5f; */
+
+

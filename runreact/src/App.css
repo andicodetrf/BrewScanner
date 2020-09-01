@@ -63,6 +63,10 @@ html{
   margin: 0 20px;
 }
 
+.qod-card{
+  margin-top: 50px;
+}
+
 .tss{
   padding-left: 10px;
   /* z-index:50; */
@@ -147,4 +151,8 @@ html{
   text-align: center;
   padding-top: 10px;
   height: 50px;
+}
+
+.overall{
+  min-height: 95vh;
 }

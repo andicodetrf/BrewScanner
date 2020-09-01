@@ -136,7 +136,9 @@ class App extends Component{
     
 
     return (
+      
       <Router>
+        <div className="overall">
         <Navigation user={user} logout={this.logoutHandler}/>
         {errorMessage && <Alert>{errorMessage}</Alert>}
         <Switch>
@@ -179,10 +181,13 @@ class App extends Component{
           />
 
         </Switch>
+        </div>
         <footer class="site-footer">
           Footer
         </footer>
+        
       </Router>
+      
     );
     }
 }
