@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
-import {Container, Button, Row, Col, Card, FormControl, Badge, Pagination} from "react-bootstrap"
+import {Container, Button, Row, Col, Card, FormControl, Badge} from "react-bootstrap"
 // import cheerio from 'cheerio'
 
 
@@ -114,9 +114,6 @@ class Home extends Component {
           return m.itemFrom.match(regex)
       })
 
-      
-        
-
       if(matches.length>0){
         this.setState({ suppFilteredList: matches });
       }
@@ -194,11 +191,12 @@ class Home extends Component {
 
     render() {
 
-      let {currentPage, itemsPerPage} = this.state
-
       const displayList = 
       (this.state.isFilterSupp && this.state.searchKey === "") ? this.state.suppFilteredList :  
           ((this.state.filteredList.length > 0) ? this.state.filteredList : (this.state.displaySort.length> 0 ? this.state.displaySort :  this.state.items ))
+
+      //---- start for pagination
+      let {currentPage, itemsPerPage} = this.state
 
       const indexOfLastItem = currentPage * itemsPerPage
       const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -208,78 +206,98 @@ class Home extends Component {
       for(let i = 1; i<=Math.ceil((displayList.length)/itemsPerPage); i++){
         totalPages.push(i)
       }
+
+      //---- end for pagination
       
         return (
-            <div style={{margin: "0 50px"}}>
+          <div className="home-page">
+            <div className="home-main" >
                 
                 <Container fluid>
-                  <nav>
-                  <ul className="pagination">
-                    {totalPages.map((pg,idx) => (
-                    
-                      <li key={pg}  className="page-item">
-                          <a className="page-link" href="#" onClick={()=>this.paginate(pg)}> {pg}</a>
-                      </li>
-                    )
-                      
-                        
-                  )}
-                  </ul>
-                  </nav>
+                  <Row className="mb-2">
+                    <Col md="2">
+                    </Col>
 
-                  <Row className="my-4">
-                    <Col md={{ span: 4, offset: 5 }}>
+                    <Col md="5" >
                     
-                        <FormControl type="text" name="filter" pattern="[A-Za-z0-9]" value={this.state.searchKey} placeholder="Search..." onChange={this.searchList}/>
+                        <FormControl className="shadow-sm bg-white rounded" id="searchbox" type="text" name="filter" pattern="[A-Za-z0-9]" value={this.state.searchKey} placeholder="Search..." onChange={this.searchList}/>
                       
                     </Col>
+
+                    <Col md="5" id="page-btn">
+
+                  
+                      <nav>
+
+                        <ul className="pagination shadow-sm bg-white rounded">
+                          {totalPages.map((pg,idx) => (
+                          
+                            <li key={pg}  className="page-item ">
+                                <a className="page-link text-secondary" href="#" onClick={()=>this.paginate(pg)}> {pg}</a>
+                            </li>
+                          )
+                            
+                        )}
+                        </ul>
+                      </nav>
+                      </Col>
+
                   </Row>
 
                   <Row>
 
                   <Col md="2">
-                    
-                  <div>
+                  <Card className="shadow p-3 rounded mb-2 bg-light">
+                    <Card.Body>
+                      
+                    <div>
                   
-                      <h4>Searched:</h4>
-
+                      <h6>Searched:</h6>
                       {(this.state.searchKey) ? 
-                      <p className="text-muted">{this.state.searchKey} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></p>
+                      <p className="text-muted small">{this.state.searchKey} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></p>
                       : null
                       }
                     </div>
 
                     <div>
-                      <h4>Filtered:</h4>
+                      <h6>Filtered:</h6>
                       {(this.state.filterBy) ? 
-                      <p className="text-muted">{this.state.filterBy} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></p>
+                      <p className="text-muted small">{this.state.filterBy} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></p>
                       : null
                       }
                     </div>
 
                     <hr />
+                    
 
-                    <h4>Sort By Price</h4>
-                    <Button variant="outline-danger" className="mr-2" name="lowestToggle" onClick={this.showLowestHandler}>Lowest</Button>
-                    <Button variant="outline-dark" name="highestToggle" onClick={this.showHighestHandler} className="mr-2">Highest</Button>
-                    {this.state.lowestToggle || this.state.highestToggle ? <Button variant="outline-danger" onClick={this.clearSortHandler}>X</Button> : null}
+                    <h6>Filter By</h6>
+                    <Button variant="outline-danger" className="mr-2 mb-2" name="FairPrice" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>FairPrice</Button>
+                    <Button variant="outline-dark" className="mb-2" name="Cold Storage" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>Cold Storage</Button>
+
                     <hr />
-                    <h4>Filter By Supplier</h4>
-                    <Button variant="outline-danger" className="mr-2" name="FairPrice" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>FairPrice</Button>
-                    <Button variant="outline-dark" name="Cold Storage" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>Cold Storage</Button>
+
+                    <h6>Sort By Price</h6>
+                    <Button variant="outline-danger" className="mr-2 mb-2" id="lowTog" name="lowestToggle" onClick={this.showLowestHandler}><i className="fas fa-sort-down fa-2x"></i></Button>
+
+                    <Button variant="outline-dark" className="mb-2" id="highTog" name="highestToggle" onClick={this.showHighestHandler} ><i className="fas fa-sort-up fa-2x"></i></Button>
+                    {this.state.lowestToggle || this.state.highestToggle ? <Button variant="outline-danger" onClick={this.clearSortHandler}>X</Button> : null}
+
+                    
+                    </Card.Body>
+                  </Card>
 
                   </Col>
 
                   <Col md="10">
                   
-                  <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px black"}} >
+                  <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px transparent"}} >
                 
                   {(this.state.searchError) ? this.state.searchError :
                     currentItemsList.map(item => (
                     // displayList.map(item => (
                             <Col key={item.itemID} md="4">
-                                <Card  className="mb-3" style={{height: "24em"}}>
-                                <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain"}}/>
+                                <Card  className="mb-3 shadow p-3 mb-5 bg-white rounded" style={{minHeight: "24em"}}>
+                                <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain", }}/>
                                     <Card.Body className="text-sm">
                                         {item.itemName}
                                         <div>
@@ -308,6 +326,7 @@ class Home extends Component {
 
 
                 </Container>
+            </div>
             </div>
         )
     }

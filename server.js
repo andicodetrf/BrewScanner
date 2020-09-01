@@ -4,8 +4,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const cheerio = require("cheerio")
-const Axios = require('axios')
+// const cheerio = require("cheerio")
+// const Axios = require('axios')
 // const { createProxyMiddleware } = require('http-proxy-middleware');
 // const puppeteer = require('puppeteer')
 
@@ -92,9 +92,19 @@ app.use('/api/auth', require('./routes/auth.route'))
         // .then((res) => {
         //     console.log(res.data);
         //     let $ = cheerio.load(res.data);
-            // let x = $("#root"); 
-            // console.log(x._root[0].children[1].children[2].children[25].next.children)
-            // console.log(x)
+        //     let x = $("#root"); 
+        //     console.log(x._root[0].children[1].children[2].children[25].next.children)
+        //     console.log(x)
+        // })
+
+        // Axios.get("https://redmart.lazada.sg/shop-groceries-wines-beers-spirits-beer/?spm=a2o42.lazmart_channel.nav_category_tree.160.447b48a6JXGID6&scm=1003.4.icms-zebra-100648641-4240157.OTHER_6017481070_3893702&m=redmart")
+        // Axios.get('https://shopee.sg/Alcoholic-Beverages-cat.169.14255')
+        // .then((res) => {
+        //     console.log(res.data);
+        //     // let $ = cheerio.load(res.data);
+        //     // let x = $("#root"); 
+        //     // console.log(x._root[0].children[1].children[2].children[25].next.children)
+        //     // console.log(x)
         // })
       
 

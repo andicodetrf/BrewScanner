@@ -154,6 +154,8 @@ router.post('/login', async(req,res) => {
 //     }
 // })
 
+
+//GET USER
 router.get("/user", checkToken, async (req, res) => {
     try {
       let user = await User.findById(req.user.id, "-password");
@@ -166,6 +168,30 @@ router.get("/user", checkToken, async (req, res) => {
       });
     }
   });
+
+//EDIT USER ADDRESS ONLY
+router.put("/user", checkToken, async (req, res) => {
+    try {
+    let {address} = req.body
+    console.log(address)
+
+      let user = await User.findByIdAndUpdate(req.user.id, {address});
+    
+        if(user){
+            console.log(user)
+            res.status(200).json({
+            user,
+        });
+        }
+    } catch (error) {
+        console.log(error)
+      res.status(500).json({
+        message: "unable to update!",
+      });
+    }
+  });
+
+
 
 
 module.exports = router;

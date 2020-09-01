@@ -1,0 +1,19 @@
+.element-outer{
+    background-color:#e0e0e0;
+    height: 89vh;
+  }
+  
+  .element {
+    align-items: center;
+    box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),
+      -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    margin: 20px auto;
+    width: 300px;
+    background: #e0e0e0;
+  }

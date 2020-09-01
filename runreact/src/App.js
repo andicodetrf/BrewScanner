@@ -9,6 +9,7 @@ import Home from "./components/Home";
 // import Item from "./components/items/Item";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import EditProfile from "./components/user/EditProfile";
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing";
 import Axios from "axios";
@@ -95,7 +96,6 @@ class App extends Component{
 
 
   logoutHandler = (e) => {
-
     //default action of anchor tag from one page to another. so you wanna stop it 
     e.preventDefault() // you dont want to redirect to /logout coz theres nothing there.
       console.log('loggedout')
@@ -126,6 +126,7 @@ class App extends Component{
     }
   }
 
+  
 
 
 
@@ -141,14 +142,13 @@ class App extends Component{
         <Switch>
         <PrivateRoute exact path="/" isAuth={isAuth} component={Home} /> 
         
-          {/* <PrivateRoute
+          <PrivateRoute
+            // user={user}
             exact
-            path="/item/add"
+            path="/editprofile"
             isAuth={isAuth}
-            component={AddItem}
-          /> */}
-
-          {/* <Route path="/" exact render={() => <Home />} /> */}
+            component={EditProfile}
+          />
           {/* <Route path="/item/add" exact render={() => <AddItem />} /> */}
           {/* <PrivateRoute
             exact
@@ -177,7 +177,11 @@ class App extends Component{
               isAuth ? <Redirect to="/" /> : <Landing />
             }
           />
+
         </Switch>
+        <footer class="site-footer">
+          Footer
+        </footer>
       </Router>
     );
     }

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import {Row, Form, Button, Container, Col} from 'react-bootstrap'
+import {Row, Form, Button, Container, Col, Alert} from 'react-bootstrap'
 
 export default class Register extends Component {
 
     state={
-        fullname:"",
+        fullName:"",
         birthDate: "",
         address: "",
         email: "",
-        password: ""
+        password: "",
+        regError: "",
     }
 
     changeHandler = (e) => {
@@ -16,7 +17,22 @@ export default class Register extends Component {
     }
 
     childSignUpHandler = () => {
-        this.props.register(this.state)
+        console.log('line20', this.state)
+
+        if(!this.state.fullName || !this.state.birthDate || !this.state.address || !this.state.email){
+            this.setState({regError: "All fields are required to complete the registration"})
+        } 
+        
+        if (!this.state.password || this.state.password.length < 5){
+            this.setState({regError: "Minimum 5 characters required for Password"})
+        } else {
+            this.props.register(this.state)
+        }
+
+            setTimeout(()=>{
+                this.setState({regError: ''})
+            }, 3000)
+        
     }
 
 
@@ -36,8 +52,11 @@ export default class Register extends Component {
             <div>
                 <h1>Register</h1>
                 <Container>
+                {(this.state.regError.length>0)? <Alert variant="danger">{this.state.regError}</Alert> : null}
+
                 <Row className="justify-content-md-center">
                 <Col md="8">
+                <Form>
                 <Row className="mb-4">
                 <Form.Label>Full Name</Form.Label>
                     <Form.Control 
@@ -45,8 +64,11 @@ export default class Register extends Component {
                         type="text" 
                         placeholder="John Doe"
                         onChange={this.changeHandler}
+                        required
                     />
+                    <small className="form-text text-muted">Required.</small>
                 </Row>
+                
                 <Row className="mb-4">
                 <Form.Label>Date of Birth</Form.Label>
                     <Form.Control 
@@ -54,7 +76,9 @@ export default class Register extends Component {
                         name ="birthDate" 
                         type="date" 
                         onChange={this.changeHandler}
+                        required
                     />
+                    <small className="form-text text-muted">Required.</small>
                 </Row>
 
                 <Row className="mb-4">
@@ -64,7 +88,9 @@ export default class Register extends Component {
                         type="text" 
                         placeholder="79 Anson Rd"
                         onChange={this.changeHandler}
+                        required
                     />
+                    <small className="form-text text-muted">Required.</small>
                 </Row>
 
                 <Row className="mb-4">
@@ -74,7 +100,9 @@ export default class Register extends Component {
                         type="email" 
                         placeholder="johnny@gmail.com"
                         onChange={this.changeHandler}
+                        required
                     />
+                    <small className="form-text text-muted">Required.</small>
                 </Row>
 
                 <Row className="mb-4">
@@ -83,8 +111,11 @@ export default class Register extends Component {
                         name ="password" 
                         type="password" 
                         onChange={this.changeHandler}
+                        required
                     />
+                    <small class="form-text text-muted">Required. 5 characters minimum</small>
                 </Row>
+                
 
                
                 <Row className="mb-4">
@@ -92,10 +123,13 @@ export default class Register extends Component {
                     {" "}
                     Register</Button>
                 </Row>
+                </Form> 
 
                 </Col>
                 </Row>
 
+                {/* <input type="text" required/>
+                <input type="submit" value="submit"/> */}
                 </Container>
             </div>
         )

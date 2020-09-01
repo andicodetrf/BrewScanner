@@ -37,6 +37,10 @@
   }
 } */
 
+html{
+  scroll-behavior: smooth;
+}
+
 .landing-bg{
   background-image: url('./components/beercheers.jpg');
   background-repeat: no-repeat;
@@ -51,4 +55,96 @@
   background-size: cover;
   /* object-fit: cover; */
   background-position: center;
+}
+
+.qod-card, .cardbody {
+  background: #f2e8cf !important;
+  opacity: 0.85;
+  margin: 0 20px;
+}
+
+.tss{
+  padding-left: 10px;
+  /* z-index:50; */
+  font-size:0.9em; 
+  font-weight: bold;
+}
+
+.tss a {
+  color: #ccc; 
+  margin-left: 4px; 
+  vertical-align: middle;
+}
+
+
+.arrow{
+  height: 200px;
+}
+
+.fa-angle-down{
+  color: #f2e8cf;
+}
+
+.fa-angle-down:hover{
+  color: #f2e8cf;
+  margin-top: 20px;
+  transition: 0.5s;
+}
+
+.age-section{
+  height: 150px;
+  background-color: darkslategray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#eligible-reg{
+  height: 50px;
+}
+
+#searchbox{
+  width: 50%;
+  min-width: 150px;
+}
+
+#page-btn{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+#lowTog{
+
+  padding: 0px 15px 12px 15px;
+}
+
+#highTog{
+  
+  padding: 12px 15px 0px 15px;
+
+}
+
+
+.home-page{
+  background-color: rgb(240, 240, 240);
+  padding-top: 20px;
+}
+
+.home-main{
+  margin: 0 50px !important; 
+}
+
+/* .sidebar{
+  background: lightsalmon;
+} */
+
+.site-footer{
+  background-color: rgb(45,51,56);
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  height: 50px;
 }
