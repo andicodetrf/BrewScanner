@@ -217,7 +217,9 @@ router.get('/', checkToken, async(req,response) => {
                     itemImgURL: ntucImgURLs[i],
                     itemFrom: "FairPrice",
                     itemOriURL: `https://www.fairprice.com.sg${ntucProductURLs[i]}`,
-                    itemID: ntucProductURLs[i].substring(9)
+                    itemID: ntucProductURLs[i].substring(9),
+                    itemQty: 10,
+
                 }
 
                 items.push(item)
@@ -333,7 +335,8 @@ router.get('/', checkToken, async(req,response) => {
                                     itemImgURL: csImgURLs[i],
                                     itemFrom: 'Cold Storage',
                                     itemOriURL: `https://coldstorage.com.sg${csProductURLs[i]}`,
-                                    itemID: csProductURLs[i]
+                                    itemID: csProductURLs[i],
+                                    itemQty: 10,
                                 }
                         items.push(item2)
                     }

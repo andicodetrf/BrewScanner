@@ -70,6 +70,8 @@ class App extends Component{
           isAuth: false,
           errorMessage: err.response.data.message,
         });
+
+        setTimeout(()=>{this.setState({errorMessage: null})}, 3000)
     })
   }
   
@@ -89,7 +91,10 @@ class App extends Component{
         // console.log(err);
         this.setState({
           isAuth: false,
+          errorMessage: err.response.data.message,
         });
+
+        setTimeout(()=>{this.setState({errorMessage: null})}, 3000)
       });
   };
 
@@ -140,7 +145,9 @@ class App extends Component{
       <Router>
         <div className="overall">
         <Navigation user={user} logout={this.logoutHandler}/>
-        {errorMessage && <Alert>{errorMessage}</Alert>}
+            
+                {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+            
         <Switch>
         <PrivateRoute exact path="/" isAuth={isAuth} component={Home} /> 
         

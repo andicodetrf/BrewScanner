@@ -55,7 +55,7 @@ router.post('/register', async(req,res) => {
     }catch(err) {
 
         res.status(500).json({
-            message: 'oh no failed to register user'
+            message: 'Unable to Register. All fields must be completed'
         })
     }
 })
@@ -77,7 +77,7 @@ router.post('/login', async(req,res) => {
         //if cant find the user, then 
         if(!user){
             return res.status(400).json({
-                message: "user not found"
+                message: "Please enter log in details"
             })
         }
 
@@ -91,7 +91,7 @@ router.post('/login', async(req,res) => {
 
         if(!isMatch){
             return res.status(400).json({
-                message: 'Aiyo you tryna hack me?'
+                message: 'Incorrect Email or Password'
             })
         }
 
@@ -118,7 +118,7 @@ router.post('/login', async(req,res) => {
     }catch(err) {
         // console.log(err)
         res.status(500).json({
-            message: 'hmm dont know what happened man'
+            message: 'Error: 500'
         });
     }
     

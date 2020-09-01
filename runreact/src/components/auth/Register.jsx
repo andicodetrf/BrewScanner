@@ -17,18 +17,12 @@ export default class Register extends Component {
     }
 
     childSignUpHandler = () => {
-        console.log('line20', this.state)
-
-        if(!this.state.fullName || !this.state.birthDate || !this.state.address || !this.state.email){
-            this.setState({regError: "All fields are required to complete the registration"})
-        } 
         
-        if (!this.state.password || this.state.password.length < 5){
+        if (this.state.password.length < 5){
             this.setState({regError: "Minimum 5 characters required for Password"})
         } else {
             this.props.register(this.state)
         }
-
             setTimeout(()=>{
                 this.setState({regError: ''})
             }, 3000)
@@ -50,12 +44,17 @@ export default class Register extends Component {
 
         return (
             <div>
-                <h1>Register</h1>
-                <Container>
-                {(this.state.regError.length>0)? <Alert variant="danger">{this.state.regError}</Alert> : null}
+                {(this.state.regError.length>0) && <Alert variant="danger">{this.state.regError}</Alert>}
 
+                <Container>
+                
                 <Row className="justify-content-md-center">
                 <Col md="8">
+
+                <Row className="mb-4 mt-4">
+                <h1>Registration</h1>
+                </Row>
+
                 <Form>
                 <Row className="mb-4">
                 <Form.Label>Full Name</Form.Label>

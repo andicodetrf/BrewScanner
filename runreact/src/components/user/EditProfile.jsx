@@ -74,18 +74,23 @@ class EditProfile extends Component {
 
     render() {
 
+        let bd;
+        let day;
+        let month;
+        let year;
+
         if(this.state.user.birthDate){
             let d = new Date(this.state.user.birthDate)
-            let bd = d.toDateString().substring(4)
-        // let day = d.getDate()
-        // let month = d.getMonth() + 1
-        // let year = d.getMonth() + 1
-        console.log(bd)
-        // console.log(day)
-        // console.log(month)
+            bd = d.toDateString().substring(4)
+            day = d.getDate()
+            month = d.toLocaleString('default', { month: 'short' })
+            year = d.getFullYear()
+
+            bd = `${day} ${month} ${year}`
         }
 
-
+        console.log(year)
+        console.log(bd)
 
         return (
             <div className="element-outer">
@@ -99,7 +104,7 @@ class EditProfile extends Component {
                         {this.state.user.fullName}    
                     </div>
                     <div className="element">
-                        {this.state.user.birthDate}    
+                        Born {bd}
                     </div>
                     <div className="element">
                         {this.state.user.email}    

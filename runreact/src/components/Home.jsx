@@ -68,12 +68,21 @@ class Home extends Component {
     //for filter
     searchList = (e) =>{
         console.log(e.target.value);
+        // let searchVal = e.target.value;
+        // let validatedVal;
+        // if((e.target.value.match(/[$-/:-?{-~!"^_`\[\]]/)).length > 1){
+        //   validatedVal = 'invalid'
+        // } else {
+        //   validatedVal = e.target.value
+        // }
         this.setState({ searchKey: e.target.value, lowestToggle: false, highestToggle: false });
 
         let matches;
         if(this.state.isFilterSupp){
             matches =  this.state.suppFilteredList.filter(m => {
               const regex = new RegExp(`${e.target.value}`, 'gi')
+              // const regex = new RegExp(`${validatedVal}`, 'gi')
+
               return m.itemName.match(regex) 
              })
 
@@ -81,6 +90,7 @@ class Home extends Component {
             this.setState({suppDisabled : true })
               matches =  this.state.items.filter(m => {
                 const regex = new RegExp(`${e.target.value}`, 'gi')
+                // const regex = new RegExp(`${validatedVal}`, 'gi')
                 return m.itemName.match(regex) || m.itemFrom.match(regex) || m.itemUnit.match(regex)
              })
 
@@ -225,10 +235,12 @@ class Home extends Component {
                     </Col>
 
                     <Col md="5" id="page-btn">
-
-                  
-                      <nav>
-
+                      
+                    
+                      <nav style={{display: "flex"}}>
+                      <a href="#" className="btn btn-outline-warning mr-2 mb-3" >
+                          <i class="fas fa-cart-plus"></i></a>
+                      
                         <ul className="pagination shadow-sm bg-white rounded">
                           {totalPages.map((pg,idx) => (
                           
@@ -254,7 +266,7 @@ class Home extends Component {
                   
                       <h6>Searched:</h6>
                       {(this.state.searchKey) ? 
-                      <Badge variant="warning" className="text-muted" size="sm">{this.state.searchKey} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></Badge>
+                        <Badge variant="warning" className="text-muted mb-3" size="sm">{this.state.searchKey} <Badge variant="danger" size="xs" onClick={this.removeFilter} style={{cursor: "pointer"}}>X</Badge></Badge>
                       : null
                       }
                     </div>
@@ -271,16 +283,22 @@ class Home extends Component {
                     
 
                     <h6>Filter By</h6>
-                    <Button variant="outline-danger" className="mr-2 mb-2" name="FairPrice" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>FairPrice</Button>
-                    <Button variant="outline-dark" className="mb-2" name="Cold Storage" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>Cold Storage</Button>
+                      <Button variant="outline-danger" className="mr-2 mb-2" name="FairPrice" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>FairPrice</Button>
+
+                      <Button variant="outline-dark" className="mb-2" name="Cold Storage" onClick={this.filterSupp} disabled={this.state.suppDisabled? "disabled" : null}>Cold Storage</Button>
 
                     <hr />
 
                     <h6>Sort By Price</h6>
-                    <Button variant="outline-danger" className="mr-2 mb-2" id="lowTog" name="lowestToggle" onClick={this.showLowestHandler}><i className="fas fa-sort-down fa-2x"></i></Button>
+                      <Button variant="outline-danger" className="mr-2 mb-2" id="lowTog" name="lowestToggle" onClick={this.showLowestHandler} disabled={this.state.suppDisabled? "disabled" : null} >
+                        <i className="fas fa-sort-down fa-2x"></i>
+                      </Button>
 
-                    <Button variant="outline-dark" className="mb-2" id="highTog" name="highestToggle" onClick={this.showHighestHandler} ><i className="fas fa-sort-up fa-2x"></i></Button>
-                    {this.state.lowestToggle || this.state.highestToggle ? <Badge variant="danger" className="ml-2"onClick={this.clearSortHandler} style={{cursor: "pointer"}}>X</Badge> : null}
+                      <Button variant="outline-dark" className="mb-2" id="highTog" name="highestToggle" onClick={this.showHighestHandler} disabled={this.state.suppDisabled? "disabled" : null}>
+                        <i className="fas fa-sort-up fa-2x"></i>
+                      </Button>
+
+                      {this.state.lowestToggle || this.state.highestToggle ? <Badge variant="danger" className="ml-2"onClick={this.clearSortHandler} style={{cursor: "pointer"}}>X</Badge> : null}
 
                     
                     </Card.Body>
@@ -296,7 +314,7 @@ class Home extends Component {
                     currentItemsList.map(item => (
                     // displayList.map(item => (
                             <Col key={item.itemID} md="4">
-                                <Card  className="mb-3 shadow p-3 mb-5 bg-white rounded" style={{minHeight: "24em"}}>
+                                <Card  className="mb-3 shadow mb-5 bg-white rounded" style={{minHeight: "24em"}}>
                                 <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain", }}/>
                                     <Card.Body className="text-sm">
                                         {item.itemName}
@@ -307,13 +325,21 @@ class Home extends Component {
                                         ${item.itemPrice}
                                         </div>
                                         <div>
-                                        Supplied By: {item.itemFrom}
+                                        Stock: {item.itemQty}
                                         </div>
+                                        {/* <div>
+                                        From: {item.itemFrom}
+                                        </div> */}
                                         <div>
                                           <a href={item.itemOriURL} target="_blank">Visit {item.itemFrom}</a>
                                         </div>
                                     </Card.Body>
+                                    <Card.Footer className="text-right">
+                                        <a href="#" className="btn btn-outline-warning"><i class="fas fa-cart-plus"></i></a>
+                                    </Card.Footer>
+                                    
                                 </Card>
+                                
                             </Col>
                     ))
                   }
