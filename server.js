@@ -4,6 +4,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const stripe = require("stripe")(`${process.env.NODE_STRIPE_KEY}`)
+const { v4: uuidv4 } = require('uuid');
 // const cheerio = require("cheerio")
 // const Axios = require('axios')
 // const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -20,6 +22,62 @@ app.use(express.json()) // allows me to receive JSON files from HEADER of REQUES
 //=== REQUEST
 app.use('/api/items', require('./routes/item.route'))
 app.use('/api/auth', require('./routes/auth.route'))
+
+
+
+
+app.post('/api/checkout', async (req,res) => {
+    console.log("Request", req.body)
+
+    let error;
+    let status;
+
+    try{
+        const { order, totalCost, token } = req.body
+
+        const customer = await 
+        stripe.customers.create({
+            email: token.email,
+            source: token.id
+        });
+
+        let idempotency_key = uuidv4()
+        const charge = await stripe.charges.create({
+            amount: totalCost*100,
+            currency: "sgd",
+            customer: customer.id,
+            receipt_email: token.email, 
+            description: order,
+            shipping: {
+                name: token.card.name,
+                address: {
+                    line1: token.card.address_line1,
+                    line2: token.card.address_line2,
+                    city: token.card.address_city,
+                    country: token.card.address_country,
+                    postal_code: token.card.address_zip
+                }
+            }
+
+        },
+        {
+            idempotency_key
+        }
+        
+    );
+    console.log("Charge:", {charge});
+    status = "success";
+    
+    }catch(err){
+        console.log("Error:", err)
+        status = "failure";
+    }
+
+    res.json({error, status})
+});
+
+
+
 
 // app.get('/sp', async (req,res) => {
 //     try{

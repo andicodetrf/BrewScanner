@@ -192,3 +192,26 @@ html{
   background: rgb(247, 195, 83);
   cursor: pointer;
 }
+
+.StripeCheckout{
+  background: firebrick !important;
+
+} 
+
+.StripeCheckout > span{
+  background-image: linear-gradient(rgba(255, 255, 255, 0.002), rgba(255, 255, 255, 0.002) 85%, rgba(255, 255, 255, 0.002)) !important;
+  background: firebrick !important;
+  
+}
+
+.StripeCheckout:hover{
+  background: red !important;
+
+} 
+
+.StripeCheckout > span:hover{
+  background-image: linear-gradient(rgba(255, 255, 255, 0.002), rgba(255, 255, 255, 0.002) 85%, rgba(255, 255, 255, 0.002)) !important;
+  background: red !important;
+  
+}
+
