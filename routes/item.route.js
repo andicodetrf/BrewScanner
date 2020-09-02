@@ -337,6 +337,7 @@ router.get('/', checkToken, async(req,response) => {
                                     itemOriURL: `https://coldstorage.com.sg${csProductURLs[i]}`,
                                     itemID: csProductURLs[i],
                                     itemQty: 10,
+                                    
                                 }
                         items.push(item2)
                     }

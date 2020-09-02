@@ -15,10 +15,10 @@ const transactionSchema = new mongoose.Schema({
             type: Boolean,
             default: false
           },  
-          orderStatus: {
-            type: Boolean,
-            default: false
-          },  
+          // orderStatus: {
+          //   type: Boolean,
+          //   default: false
+          // },  
           purchasedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"

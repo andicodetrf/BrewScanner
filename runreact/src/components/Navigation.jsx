@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav , Form, FormControl, Button} from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Navigation({ user, logout }) {
@@ -12,9 +12,6 @@ function Navigation({ user, logout }) {
         <Nav className="mr-auto">
           <Link className="nav-link" to="/">
             Home
-          </Link>
-          <Link className="nav-link" to="/item/add">
-            Add item
           </Link>
         </Nav>
 

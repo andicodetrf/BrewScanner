@@ -5,7 +5,7 @@ import Axios from 'axios'
 import './Landing.css'
 
 class Landing extends Component {
-
+    mount = true
     state={
         isAbove18: false,
         qod: '',
@@ -20,16 +20,23 @@ class Landing extends Component {
         Axios.get('http://quotes.rest/qod.json?category=inspire')
         .then((res) => {
             // console.log(res.data.contents)
-            this.setState({
-                qod: res.data.contents.quotes[0].quote, 
-                qodAuthor: res.data.contents.quotes[0].author, 
-            })
+            if(this.mount){
+                this.setState({
+                    qod: res.data.contents.quotes[0].quote, 
+                    qodAuthor: res.data.contents.quotes[0].author, 
+                })
+            }
+            
         })
         .catch((err) => console.log(err))
     }
 
     componentDidMount(){
         this.getQOD();
+    }
+
+    componentWillUnmount(){
+        this.mount = false
     }
 
     render(){
@@ -40,12 +47,12 @@ class Landing extends Component {
                 <div className="landing-bg">
 
                
-                <div class="typewriter">
-                    <h1>Scanning for your cheapest brew! <i class="fas fa-glass-cheers"></i></h1>
+                <div className="typewriter">
+                    <h1>Scanning for your cheapest brew! <i className="fas fa-glass-cheers"></i></h1>
                 </div>
 
-                <div class="none-type">
-                    <h1>Scanning for your cheapest brew! <i class="fas fa-glass-cheers"></i></h1>
+                <div className="none-type">
+                    <h1>Scanning for your cheapest brew! <i className="fas fa-glass-cheers"></i></h1>
                 </div>
              
 

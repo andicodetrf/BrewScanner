@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Home from "./components/Home";
-// import Item from "./components/items/Item";
+import CartInfo from "./components/items/CartInfo";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import EditProfile from "./components/user/EditProfile";
@@ -27,7 +27,97 @@ class App extends Component{
     errorMessage: null,
     isAuth: false,
     user: null,
+    cart: [],
+    cartItem: 0
   };
+
+  addToCart = (item) => {
+          //copy state of cart
+    let temp = [...this.state.cart]
+
+    //temp solution
+    let foundItemIndex = temp.findIndex(ele => ele.itemID === item.itemID) 
+    
+    let total, sum
+    if(foundItemIndex !== -1){
+      temp[foundItemIndex].quantity += 1  
+      
+      // console.log("sum of items: ",sum)
+    }else{
+      item.quantity = 1
+      //push item from params to cart
+      temp.push(item)
+    }
+     
+      sum = 0
+      temp.forEach(element => {
+          sum += element.quantity
+      });
+      total = sum
+      //take user id from token by decoding token
+      let user = decode(localStorage.token)
+      //convert this object to string for localStorage
+      let userCart = JSON.stringify({ belongsTo: user.user.id, cart : temp })
+    
+     
+      
+      let finalTotal = total
+      // set string to cart in localStorage
+      localStorage.setItem('cart', userCart)  
+      localStorage.setItem('cartItemTotal', finalTotal)  
+
+      //set cart to state
+      this.setState({ cart : temp, cartItem: finalTotal })
+    //end temp solution   
+
+  }
+
+  removeToCart = (item) => {
+    //copy state of cart
+  let temp = [...this.state.cart]
+
+    //temp solution
+    let foundItemIndex = temp.findIndex(ele => ele.itemID === item.itemID) 
+
+    if(foundItemIndex !== -1){
+
+      if(temp[foundItemIndex].quantity > 1){
+        temp[foundItemIndex].quantity -= 1 
+
+      }else{
+        // to splice
+        temp.splice(foundItemIndex, 1)
+      }
+      let sum = 0
+      temp.forEach(element => {
+        sum += element.quantity
+      });
+
+     
+      console.log(temp)
+      // 
+      //
+      //
+       //take user id from token by decoding token
+      let user = decode(localStorage.token)
+      //convert this object to string for localStorage
+      let userCart = JSON.stringify({ belongsTo: user.user.id, cart : temp })
+
+      // let total = temp.reduce((a, b) => ({total : a.quantity + b.quantity}));
+
+      // set string to cart in localStorage
+      // let finalTotal = total.total
+      // set string to cart in localStorage
+      localStorage.setItem('cart', userCart)  
+      localStorage.setItem('cartItemTotal', sum)  
+      //set cart to state
+      this.setState({ cart : temp, cartItem: sum })
+   
+    }
+   
+    //end temp solution   
+
+}
 
   getUserProfile = (token) => {
     Axios.get(`${URL}/auth/user`, {
@@ -36,12 +126,49 @@ class App extends Component{
       },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log("user data: ",res.data);
+        // console.log("user data: ",res.data.user._id);
+       
+        //check is cart is in localStorage
+        if(localStorage.getItem('cart') != null){
+          let cart = JSON.parse(localStorage.cart) //convert from string to object
+          let sum = 0
+          console.log(cart.cart.length)
+          for(let x = 0; x < cart.cart.length; x++){
+              sum+= cart.cart[x].quantity
+          }
+          
+          localStorage.setItem("cartItemTotal", sum)
+          // + before a string converts string to number
+          // let total = JSON.parse(localStorage.getItem('cartItemTotal'));
+          
+          // let total = cart.reduce((a, b) => ({total : a.quantity + b.quantity}))
+          // console.log("after total")
 
-        this.setState({
-          isAuth: true,
-          user: res.data.user,
-        });
+          // console.log("get total : ", total)
+          //check if current user is same as user in localStorage
+          if(cart.belongsTo == res.data.user._id.toString()){
+   
+            this.setState({
+              isAuth: true,
+              user: res.data.user,
+              cart: cart.cart,
+              cartItem: sum
+            });
+          }
+          
+        }else{
+          localStorage.removeItem("cart")
+          localStorage.removeItem("cartItemTotal")
+          this.setState({
+            isAuth: true,
+            user: res.data.user,
+            cartItem: 0
+          });
+        }
+        
+
+        
       })
       .catch((err) => {
         // console.log(err);
@@ -149,7 +276,9 @@ class App extends Component{
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
             
         <Switch>
-        <PrivateRoute exact path="/" isAuth={isAuth} component={Home} /> 
+        <PrivateRoute exact path="/" isAuth={isAuth} cartItemTotal={this.state.cartItem}  cart={this.state.cart} addToCart={this.addToCart} component={Home} /> 
+
+        <PrivateRoute exact path="/cart" isAuth={isAuth} removeItemCart={this.removeToCart}  cart={this.state.cart} addToCart={this.addToCart} component={CartInfo} /> 
         
           <PrivateRoute
             // user={user}
@@ -189,7 +318,7 @@ class App extends Component{
 
         </Switch>
         </div>
-        <footer class="site-footer">
+        <footer className="site-footer">
           Footer
         </footer>
         

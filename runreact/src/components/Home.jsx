@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
+import { Link } from "react-router-dom"
 import {Container, Button, Row, Col, Card, FormControl, Badge} from "react-bootstrap"
 // import cheerio from 'cheerio'
 
@@ -21,6 +22,7 @@ class Home extends Component {
         highestToggle: false,
         currentPage: 1,
         itemsPerPage: 12,
+        cart: []
       };
 
 
@@ -35,8 +37,12 @@ class Home extends Component {
         })
           .then((res) => {
             console.log(res.data);
-            
+
+            // let toStore = res.data.items.map((eachItem) => eachItem["purchased"] = 0)
+            // this.setState({ items: toStore});
+
             this.setState({ items: res.data.items});
+
             localStorage.setItem("items", JSON.stringify(res.data.items))
             localStorage.setItem("timestamps", new Date().toString())
             
@@ -56,7 +62,7 @@ class Home extends Component {
 
       if(items && DaysDiff < 2){
         items = JSON.parse(items)  
-        console.log(DaysDiff) 
+        // console.log(DaysDiff) 
         this.setState({ items },() => {console.log(this.state.items) });
         
       } else{
@@ -67,34 +73,33 @@ class Home extends Component {
 
     //for filter
     searchList = (e) =>{
-        console.log(e.target.value);
-        // let searchVal = e.target.value;
-        // let validatedVal;
+        // console.log(e.target.value);
         // if((e.target.value.match(/[$-/:-?{-~!"^_`\[\]]/)).length > 1){
-        //   validatedVal = 'invalid'
-        // } else {
-        //   validatedVal = e.target.value
-        // }
+        
         this.setState({ searchKey: e.target.value, lowestToggle: false, highestToggle: false });
 
-        let matches;
+        let matches = [];
+        
         if(this.state.isFilterSupp){
             matches =  this.state.suppFilteredList.filter(m => {
-              const regex = new RegExp(`${e.target.value}`, 'gi')
-              // const regex = new RegExp(`${validatedVal}`, 'gi')
-
-              return m.itemName.match(regex) 
+              // const regex = new RegExp(`${e.target.value}`, 'gi')
+              // return m.itemName.match(regex) 
+               return (m.itemName.toLowerCase()).includes(e.target.value.toLowerCase())
              })
 
         } else {
             this.setState({suppDisabled : true })
               matches =  this.state.items.filter(m => {
-                const regex = new RegExp(`${e.target.value}`, 'gi')
-                // const regex = new RegExp(`${validatedVal}`, 'gi')
-                return m.itemName.match(regex) || m.itemFrom.match(regex) || m.itemUnit.match(regex)
+                // const regex = new RegExp(`${e.target.value}`, 'gi')
+                // return m.itemName.match(regex) || m.itemFrom.match(regex) || m.itemUnit.match(regex)
+                return (m.itemName.toLowerCase()).includes(e.target.value.toLowerCase()) || 
+                (m.itemUnit.toLowerCase()).includes(e.target.value.toLowerCase()) || 
+                (m.itemFrom.toLowerCase()).includes(e.target.value.toLowerCase())
+                
              })
 
         }
+      // }
 
         // console.log(matches)
 
@@ -115,13 +120,12 @@ class Home extends Component {
     
 
     filterSupp = (e) => {
-      console.log(e.target.name);
+      // console.log(e.target.name);
      
       this.setState({ filterBy: e.target.name, isFilterSupp: true, lowestToggle: false, highestToggle: false });
       
       let matches =  this.state.items.filter(m => {
-          const regex = new RegExp(`${e.target.name}`, 'gi')
-          return m.itemFrom.match(regex)
+          return m.itemFrom.match(e.target.name)
       })
 
       if(matches.length>0){
@@ -142,7 +146,6 @@ class Home extends Component {
     }
 
 
-    // filterBy:"", suppFilteredList:[]
     showLowestHandler = (e) => {
       this.setState({
         lowestToggle : true, 
@@ -186,7 +189,6 @@ class Home extends Component {
         }
 
         clearSortHandler = () => {
-
           this.setState({
             lowestToggle: false,
             highestToggle: false,
@@ -199,8 +201,57 @@ class Home extends Component {
           this.setState({currentPage: pgNum})
         }
 
-    render() {
+    mainAddToCart = (item) => {
+      this.props.addToCart(item)
+    }
 
+        addToCart = (e) => {
+          
+          console.log(e.target.id)
+          let temp = [...this.state.items]
+          let foundItem = temp.find(f => f.itemID === e.target.id)
+          // console.log(foundItem)
+          let foundItemIndex = temp.findIndex(f => f.itemID === e.target.id)
+          console.log('item index', foundItemIndex)
+
+
+          if(foundItem.itemQty){
+            
+            foundItem.itemQty = foundItem.itemQty - 1 
+            
+            let addItem = [...this.state.cart];
+
+            addItem.push(foundItem)
+
+            this.setState({cart: addItem})
+
+            temp.splice(foundItemIndex, foundItem)
+            console.log(temp)
+            this.setState({items: temp})
+            
+            
+            // localStorage.setItem("cart", JSON.stringify(cart))
+
+
+            }
+            
+            // const exist = this.state.cart.some(el => el.itemID === foundItem.itemID)
+
+            // if(exist){
+            //   temp.items[id].ordered = temp.items[id].ordered + 1
+            // } else {
+            //   temp.cart.push(temp.items[id])
+            //   temp.items[id].ordered = 1
+            // }
+
+          
+
+          
+
+        }
+
+    render() {
+      // console.log("Home: ",this.props)
       const displayList = 
       (this.state.isFilterSupp && this.state.searchKey === "") ? this.state.suppFilteredList :  
           ((this.state.filteredList.length > 0) ? this.state.filteredList : (this.state.displaySort.length> 0 ? this.state.displaySort :  this.state.items ))
@@ -230,7 +281,7 @@ class Home extends Component {
 
                     <Col md="5" >
                     
-                        <FormControl className="shadow-sm bg-white rounded" id="searchbox" type="text" name="filter" pattern="[A-Za-z0-9]" value={this.state.searchKey} placeholder="Search..." onChange={this.searchList}/>
+                        <FormControl className="shadow-sm bg-white rounded" id="searchbox" type="text" name="filter" value={this.state.searchKey} placeholder="Search..." onChange={this.searchList}/>
                       
                     </Col>
 
@@ -238,14 +289,23 @@ class Home extends Component {
                       
                     
                       <nav style={{display: "flex"}}>
-                      <a href="#" className="btn btn-outline-warning mr-2 mb-3" >
-                          <i class="fas fa-cart-plus"></i></a>
+                      {/* <a href="#" className="btn btn-outline-warning mr-2 mb-3" ></a> */}
+
+                          <Link to="/cart">
+                          <div className="view-cart">
+                            
+                          <i className="fas fa-cart-plus"></i>
+                              <span className="badge badge-danger ml-2">{this.props.cartItemTotal}</span>
+                              
+                            </div>
+                            </Link>
+                            
                       
                         <ul className="pagination shadow-sm bg-white rounded">
                           {totalPages.map((pg,idx) => (
                           
                             <li key={pg}  className="page-item ">
-                                <a className="page-link text-secondary" href="#" onClick={()=>this.paginate(pg)}> {pg}</a>
+                                <a className="page-link text-secondary" href="#name" onClick={()=>this.paginate(pg)}> {pg}</a>
                             </li>
                           )
                             
@@ -331,11 +391,12 @@ class Home extends Component {
                                         From: {item.itemFrom}
                                         </div> */}
                                         <div>
-                                          <a href={item.itemOriURL} target="_blank">Visit {item.itemFrom}</a>
+                                          <a href={item.itemOriURL}>Visit {item.itemFrom}</a>
                                         </div>
                                     </Card.Body>
                                     <Card.Footer className="text-right">
-                                        <a href="#" className="btn btn-outline-warning"><i class="fas fa-cart-plus"></i></a>
+                                        {/* <a href="#" className="btn btn-outline-warning"></a> */}
+                                          <i className="fas fa-cart-plus indi-cart" onClick={() => this.mainAddToCart(item)} id={item.itemID}></i>
                                     </Card.Footer>
                                     
                                 </Card>

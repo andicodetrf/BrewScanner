@@ -156,3 +156,39 @@ html{
 .overall{
   min-height: 95vh;
 }
+
+
+.indi-cart{
+  background: transparent;
+  padding: 7px 7px;
+  color: orange;
+  border-radius: 3px;
+  border: 1px solid orange
+}
+
+.indi-cart:hover{
+  color: white;
+  background: orange;
+  cursor: pointer;
+}
+
+.view-cart{
+  background: orange;
+  padding: 5px 20px;
+  color: white;
+  border-radius: 3px;
+  border: 1px solid orange;
+  margin-bottom: 13px;
+  margin-right: 10px;
+}
+
+.view-cart .fa-cart-plus{
+  font-size: 18px; 
+}
+
+.view-cart:hover{
+  /* color: white; */
+  border: 1px solid transparent;
+  background: rgb(247, 195, 83);
+  cursor: pointer;
+}
