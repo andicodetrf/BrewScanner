@@ -349,7 +349,6 @@ class Home extends Component {
                     <h6>Hi in deploy {this.state.searchError}</h6>
                   {
                     currentItemsList.map(item => (
-                    // displayList.map(item => (
                     <span>{item.itemName}</span>
                     ))
                   }
