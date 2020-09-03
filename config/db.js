@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 
 //===conect to mongoose
 mongoose.connect(
-    process.env.MONGODB,
+    process.env.MONGODBLIVE,
     {
         useCreateIndex: true,
         useNewUrlParser: true,

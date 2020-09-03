@@ -5,7 +5,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const stripe = require("stripe")(`${process.env.NODE_STRIPE_KEY}`)
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
+const path = require("path")
 // const cheerio = require("cheerio")
 // const Axios = require('axios')
 // const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -22,20 +23,20 @@ app.use(express.json()) // allows me to receive JSON files from HEADER of REQUES
 app.use('/api/items', require('./routes/item.route'))
 app.use('/api/auth', require('./routes/auth.route'))
 app.use('/api/transaction', require('./routes/transaction.route'))
+app.use(express.static("runreact/build"))
 
+// app.get('/secret', async (req, res) => {
+//     // const intent = // ... Fetch or create the PaymentIntent
 
-app.get('/secret', async (req, res) => {
-    // const intent = // ... Fetch or create the PaymentIntent
+//     const paymentIntent = await stripe.paymentIntents.create({
+//         amount: 1099,
+//         currency: 'sgd',
+//         // Verify your integration in this guide by including this parameter
+//         metadata: {integration_check: 'accept_a_payment'},
+//       });
 
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: 1099,
-        currency: 'sgd',
-        // Verify your integration in this guide by including this parameter
-        metadata: {integration_check: 'accept_a_payment'},
-      });
-
-    res.json({client_secret: intent.client_secret});
-  });
+//     res.json({client_secret: intent.client_secret});
+//   });
   
 
 
@@ -186,9 +187,16 @@ app.get('/secret', async (req, res) => {
 
 
 //===== 404 errors
-app.get("*", (req,res) => {
-    res.status(404).json({message: "Page Not Found", code: "EB404"})
+// app.get("*", (req,res) => {
+//     res.status(404).json({message: "Page Not Found", code: "EB404"})
+// })
+
+
+app.get("/*", (req,res) => {
+  res.sendfile(path.join(__dirname, "runreact/build/index.html"))
 })
+
+
 
 
 //===== setup server port
