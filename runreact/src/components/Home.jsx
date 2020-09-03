@@ -347,8 +347,9 @@ class Home extends Component {
                   
                   <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px transparent"}} >
                     <h6>Hi in deploy {this.state.searchError}</h6>
-                  {
+                  { (this.state.searchError) ? this.state.searchError :
                     currentItemsList.map(item => (
+                      //hi
                       <Col key={item.itemID} md="4">
                       <Card  className="mb-3 shadow mb-5 bg-white rounded" style={{minHeight: "24em"}}>
                       <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain", }}/>
