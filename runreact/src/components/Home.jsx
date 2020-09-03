@@ -346,7 +346,6 @@ class Home extends Component {
                   <Col md="10">
                   
                   <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px transparent"}} >
-                    <h6>Hi in deploy {this.state.searchError}</h6>
                   { (this.state.searchError) ? this.state.searchError :
                     currentItemsList.map(item => (
                       <Col key={item.itemID} md="4">
@@ -356,6 +355,7 @@ class Home extends Component {
                               {item.itemName}
                               <div>
                               {item.itemUnit}
+                              { /* this is a comment */ }
                               </div>
                               <div>
                               ${item.itemPrice}
