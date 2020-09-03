@@ -29,21 +29,25 @@ function Navigation({ user, logout }) {
             <Link className="nav-link nav-view-cart" to="/cart">
             <i className="fas fa-shopping-cart"></i>
             </Link>
+
+            <Link to="/orderHistory" className="nav-link">
+              <i class="fas fa-history"></i>
+              </Link>
               
               <Link to="/editprofile" className="nav-link">
                 <i className="fas fa-user-circle navbar-fa"></i>
                 </Link>
               <Link to="/editprofile" className="nav-link">
-                {user.fullName}
+                <div className="nav-items-hover">{user.fullName}</div>
               </Link>
               <Link onClick={logout} to="/logout" className="nav-link">
-                Log Out
+              <div className="nav-items-hover">Log Out</div>
               </Link>
             </>
           ) : (
             <>
               <Link to="/login" className="nav-link">
-                Log In
+              <div className="nav-items-hover">Log In</div>
               </Link>
               {/* <Link to="/register" className="nav-link">
                 Register

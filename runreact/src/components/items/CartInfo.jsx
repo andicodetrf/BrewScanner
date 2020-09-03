@@ -3,17 +3,22 @@ import { Card, Container, Row, Col, Badge } from "react-bootstrap";
 import StripeCheckout from 'react-stripe-checkout'
 import Axios from 'axios'
 import {toast} from 'react-toastify'
+// import {Elements} from '@stripe/react-stripe-js';
+// import {loadStripe} from '@stripe/stripe-js';
+// import CheckoutForm from './CheckoutForm';
+// // import {CardElement} from '@stripe/react-stripe-js';
+
 
 const URL = process.env.REACT_APP_URL;
 const reactStripeKey = process.env.REACT_APP_STRIPE_KEY;
+// const stripePromise = loadStripe(`${reactStripeKey}`);
 
 toast.configure()
 
 class CartInfo extends Component {
     state={
-        totalCost: '',
+        totalCost: '0.00',
         order: ''
-
     }
 
     componentDidMount(){
@@ -73,8 +78,36 @@ class CartInfo extends Component {
                     {type: 'error'}
                 )
         }
-
     }
+
+    submitTransactHandler = () => {
+        let token = localStorage.getItem("token");
+        let LSCart = JSON.parse(localStorage.cart)
+        let LSuserID = LSCart.belongsTo
+        
+        // console.log('t', token)
+        console.log(LSuserID)
+            Axios.post(`${URL}/transaction`, {orders: this.state.order, orderTotal: this.state.totalCost, transactionUserID: LSuserID}, {
+                headers: {
+                  "x-auth-token": token,
+                },
+              })
+            .then((res) => {
+              console.log("order submitted to server");
+            //   this.props.clearCart()
+            this.clearCartHandler()
+             
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+    }
+
+    clearCartHandler =() => {
+        this.props.clearCart()
+        this.setState({totalCost: '0.00'})
+    }
+
 
     render() {
 
@@ -86,6 +119,7 @@ class CartInfo extends Component {
                         <Card className="bg-dark text-light mt-5">
                             <Card.Header>
                                 <h4>Cart Items</h4>
+                                <span className="badge badge-danger" style={{cursor:"pointer"}} onClick={this.clearCartHandler}>Clear All</span>
                             </Card.Header>
                         </Card>
                         {this.props.cart.map(item => (
@@ -126,7 +160,17 @@ class CartInfo extends Component {
                                 shippingAddress
                                 amount={this.state.totalCost*100}
                                 orderTotal={this.state.order}
+                                
                             />
+
+                            <div className="mt-2">
+                            <a href="#" className="btn btn-outline-success shadow-sm rounded submit-order" onClick={this.submitTransactHandler}>Submit Order</a>
+                            </div>
+
+                        {/* <Elements stripe={stripePromise}>
+                            <CheckoutForm />
+                        </Elements> */}
+
                             </div>
                         </Col>
 

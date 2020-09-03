@@ -24,65 +24,73 @@ app.use('/api/auth', require('./routes/auth.route'))
 app.use('/api/transaction', require('./routes/transaction.route'))
 
 
-// const paymentIntent = await stripe.paymentIntents.create({
-//     amount: 1099,
-//     currency: 'sgd',
-//     // Verify your integration in this guide by including this parameter
-//     metadata: {integration_check: 'accept_a_payment'},
-//   });
+app.get('/secret', async (req, res) => {
+    // const intent = // ... Fetch or create the PaymentIntent
+
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: 1099,
+        currency: 'sgd',
+        // Verify your integration in this guide by including this parameter
+        metadata: {integration_check: 'accept_a_payment'},
+      });
+
+    res.json({client_secret: intent.client_secret});
+  });
+  
 
 
 
-app.post('/api/checkout', async (req,res) => {
-    console.log("Request", req.body)
 
-    let error;
-    let status;
+// app.post('/api/checkout', async (req,res) => {
+//     console.log("Request", req.body)
 
-    try{
-        const { order, totalCost, token } = req.body
+//     let error;
+//     let status;
 
-        const customer = await 
-        stripe.customers.create({
-            email: token.email,
-            source: token.id
-        });
+//     try{
+//         const { order, totalCost, token } = req.body
 
-        let idempotency_key = uuidv4()
-        const charge = await stripe.charges.create({
-            amount: totalCost*100,
-            currency: "sgd",
-            country: "Singapore",
-            customer: customer.id,
-            receipt_email: token.email, 
-            description: order,
-            shipping: {
-                name: token.card.name,
-                address: {
-                    line1: token.card.address_line1,
-                    line2: token.card.address_line2,
-                    city: token.card.address_city,
-                    country: token.card.address_country,
-                    postal_code: token.card.address_zip
-                }
-            }
+//         const customer = await 
+//         stripe.customers.create({
+//             email: token.email,
+//             source: token.id
+//         });
 
-        },
-        {
-            idempotency_key
-        }
+//         let idempotency_key = uuidv4()
+//         const charge = await stripe.charges.create({
+//             amount: totalCost*100,
+//             currency: "sgd",
+//             country: "Singapore",
+//             customer: customer.id,
+//             receipt_email: token.email, 
+//             description: order,
+//             shipping: {
+//                 name: token.card.name,
+//                 address: {
+//                     line1: token.card.address_line1,
+//                     line2: token.card.address_line2,
+//                     city: token.card.address_city,
+//                     country: token.card.address_country,
+//                     postal_code: token.card.address_zip
+//                 }
+//             }
+
+//         },
+//         {
+//             idempotency_key
+//         }
         
-    );
-    console.log("Charge:", {charge});
-    status = "success";
+//     );
+//     console.log("Charge:", {charge});
+//     status = "success";
     
-    }catch(err){
-        console.log("Error:", err)
-        status = "failure";
-    }
+//     }catch(err){
+//         console.log("Error:", err)
+//         status = "failure";
+//     }
 
-    res.json({error, status})
-});
+//     res.json({error, status})
+// });
 
 
 

@@ -274,7 +274,7 @@ class Home extends Component {
                             </Link>
                             
                       
-                        <ul className="pagination shadow-sm bg-white rounded">
+                        <ul className="pagination shadow-sm transparent rounded">
                           {totalPages.map((pg,idx) => (
                           
                             <li key={pg}  className="page-item ">
@@ -360,8 +360,8 @@ class Home extends Component {
                                         {/* <div>
                                         Stock: {item.itemQty}
                                         </div> */}
-                                        <div>
-                                          <a href={item.itemOriURL}>Visit {item.itemFrom}</a>
+                                        <div className="badge badge-dark">
+                                          <a className="text-white" href={item.itemOriURL}>{item.itemFrom}</a>
                                         </div>
                                     </Card.Body>
                                     <Card.Footer className="text-right">

@@ -10,6 +10,7 @@ import CartInfo from "./components/items/CartInfo";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import EditProfile from "./components/user/EditProfile";
+import OrderHistory from "./components/user/OrderHistory";
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing";
 import Axios from "axios";
@@ -118,6 +119,14 @@ class App extends Component{
     //end temp solution   
 
 }
+
+
+  clearTransaction = () => {
+    localStorage.removeItem('cart')
+    localStorage.removeItem('cartItemTotal')
+    this.setState({ cart : [], cartItem: 0 })
+
+  }
 
   getUserProfile = (token) => {
     Axios.get(`${URL}/auth/user`, {
@@ -278,7 +287,7 @@ class App extends Component{
         <Switch>
         <PrivateRoute exact path="/" isAuth={isAuth} cartItemTotal={this.state.cartItem}  cart={this.state.cart} addToCart={this.addToCart} component={Home} /> 
 
-        <PrivateRoute exact path="/cart" isAuth={isAuth} removeItemCart={this.removeToCart}  cart={this.state.cart} addToCart={this.addToCart} component={CartInfo} /> 
+        <PrivateRoute exact path="/cart" isAuth={isAuth} removeItemCart={this.removeToCart} clearCart={this.clearTransaction} cart={this.state.cart} addToCart={this.addToCart} component={CartInfo} /> 
         
           <PrivateRoute
             // user={user}
@@ -287,6 +296,16 @@ class App extends Component{
             isAuth={isAuth}
             component={EditProfile}
           />
+
+          <PrivateRoute
+            // user={user}
+            exact
+            path="/orderHistory"
+            isAuth={isAuth}
+            component={OrderHistory}
+          />
+
+
           {/* <Route path="/item/add" exact render={() => <AddItem />} /> */}
           {/* <PrivateRoute
             exact

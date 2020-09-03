@@ -11,6 +11,7 @@ router.post('/', checkToken, async(req,res) => {
         let newTransact = new Transaction(req.body)
 
         newTransact.transactionUserID = req.user.id
+        newTransact.isPaid = true
 
         let saveTransact = await newTransact.save()
 

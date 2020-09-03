@@ -4,8 +4,11 @@ const transactionSchema = new mongoose.Schema({
           orders: [
                       { itemName: String, 
                         itemQty: Number, 
-                        itemOrigin: String, 
-                        itemPrice: Number
+                        itemFrom: String, 
+                        itemPrice: Number,
+                        itemUnit: String,
+                        quantity: Number,
+                        
                       }
                   ], 
 
