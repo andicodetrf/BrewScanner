@@ -239,7 +239,12 @@ html{
   
 }
 
-.fa-home:hover, .fa-user-circle:hover{
+.fa-shopping-cart{
+  font-size: 25px;
+  color: #d3d3d3;
+}
+
+.fa-home:hover, .fa-user-circle:hover, .fa-shopping-cart:hover{
   color: #e4e4e4;
 }
 

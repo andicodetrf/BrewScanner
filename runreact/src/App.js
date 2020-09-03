@@ -319,7 +319,7 @@ class App extends Component{
         </Switch>
         </div>
         <footer className="site-footer">
-          Made with <i class="fas fa-heart"></i> - <a href="https://www.linkedin.com/in/andrea-lau-al/">Andi L</a> <a href="https://github.com/andicodetrf/BrewScanner"><i class="fab fa-github"></i></a> 
+          Made with <i className="fas fa-heart"></i> - <a href="https://www.linkedin.com/in/andrea-lau-al/">Andi L</a> <a href="https://github.com/andicodetrf/BrewScanner"><i className="fab fa-github"></i></a> 
         </footer>
         
       </Router>

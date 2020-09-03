@@ -12,7 +12,6 @@ const { v4: uuidv4 } = require('uuid');
 // const puppeteer = require('puppeteer')
 
 
-
 //===== require all middleware
 app.use(cors()) // allow all
 require('./config/db'); //calls my mongoose connection to cleanup this file
@@ -22,7 +21,15 @@ app.use(express.json()) // allows me to receive JSON files from HEADER of REQUES
 //=== REQUEST
 app.use('/api/items', require('./routes/item.route'))
 app.use('/api/auth', require('./routes/auth.route'))
+app.use('/api/transaction', require('./routes/transaction.route'))
 
+
+// const paymentIntent = await stripe.paymentIntents.create({
+//     amount: 1099,
+//     currency: 'sgd',
+//     // Verify your integration in this guide by including this parameter
+//     metadata: {integration_check: 'accept_a_payment'},
+//   });
 
 
 
@@ -45,6 +52,7 @@ app.post('/api/checkout', async (req,res) => {
         const charge = await stripe.charges.create({
             amount: totalCost*100,
             currency: "sgd",
+            country: "Singapore",
             customer: customer.id,
             receipt_email: token.email, 
             description: order,

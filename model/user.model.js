@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
         favItemPrice: Number,
     }],
 
+
 }, {timestamps: true})
 
 

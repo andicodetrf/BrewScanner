@@ -27,7 +27,7 @@ function Navigation({ user, logout }) {
           {user ? (
             <>
             <Link className="nav-link nav-view-cart" to="/cart">
-              View Cart
+            <i className="fas fa-shopping-cart"></i>
             </Link>
               
               <Link to="/editprofile" className="nav-link">

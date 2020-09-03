@@ -19,10 +19,11 @@ const transactionSchema = new mongoose.Schema({
           //   type: Boolean,
           //   default: false
           // },  
-          purchasedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-          },
+          // purchasedBy: {
+          //   type: mongoose.Schema.Types.ObjectId,
+          //   ref: "User"
+          // },
+          transactionUserID: String
           
 }, {timestamps: true})
 

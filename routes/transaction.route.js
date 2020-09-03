@@ -1,29 +1,24 @@
 const router = require('express').Router();
 const Transaction = require('../model/transaction.model');
 const checkToken = require("../config/config")
-const Axios = require('axios')
+const Axios = require('axios');
+const User = require('../model/user.model');
 
 //POST INTO TRANSACTION MODEL
-
-router.post('/transaction',  async(req,res) => {
+router.post('/', checkToken, async(req,res) => {
     try{
-        // let items = await Item.find()
-        let { order } = req.body
 
-        let newTransact = new Transaction(order)
+        let newTransact = new Transaction(req.body)
 
-        // if(item.name)
+        newTransact.transactionUserID = req.user.id
+
         let saveTransact = await newTransact.save()
 
         res.status(201).json({
-            message: "chen gong",
+            message: "transaction created",
             saveTransact
         });
 
-        // res.status(200).json({
-        //     count: items.length,
-        //     items,
-        // })
     }catch(err){
         res.status(500).json({
             message: "fail to save transaction",
@@ -31,6 +26,36 @@ router.post('/transaction',  async(req,res) => {
         })
     }
 })
+
+
+//GET USER
+router.get("/", checkToken, async (req, res) => {
+
+    try {
+    //   let user = await User.findById(req.user.id)
+    
+    let transactHistory = await Transaction.find()
+        // console.log(transactHistory)
+
+        let finalT = transactHistory.filter(el => el.transactionUserID === req.user.id)
+
+        console.log(finalT)
+    
+    // let user = await User.findById(req.user.id).populate("hasPurchased") 
+    // console.log(user)
+
+      res.status(200).json({
+          message: "transaction history",
+          finalT
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "something is wrong!",
+      });
+    }
+  });
+
+
 
 
 

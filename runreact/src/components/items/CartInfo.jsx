@@ -55,7 +55,7 @@ class CartInfo extends Component {
 
     async handleToken(token){
         // let {order:{itemFrom, itemName, itemID, itemPrice, itemUnit, quantity}} = this.state
-        // console.log({token, addresses})
+        console.log({token})
         const response = await Axios.post(`${URL}/checkout`, {
             token, 
             // order
