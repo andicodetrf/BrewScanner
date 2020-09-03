@@ -226,7 +226,7 @@ class Home extends Component {
         // }
 
     render() {
-      // console.log("Home: ",this.props)
+      console.log("Home: ")
       const displayList = 
       (this.state.isFilterSupp && this.state.searchKey === "") ? this.state.suppFilteredList :  
           ((this.state.filteredList.length > 0) ? this.state.filteredList : (this.state.displaySort.length> 0 ? this.state.displaySort :  this.state.items ))
