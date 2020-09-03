@@ -1,35 +1,49 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import bottlecheers from './navImg/bottlecheers.png'
+import mugbottle from './navImg/mugbottle.png'
 
 function Navigation({ user, logout }) {
     // console.log(user)
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
-      <Navbar.Brand href="/">BrewScanner</Navbar.Brand>
+      
+      <Navbar.Brand href="/">
+      <img src={bottlecheers} id="navlogo" alt="" height="40px" width="40px"/>  
+        BrewScanner
+        
+        </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Link className="nav-link" to="/">
-            Home
+          <i className="fas fa-home navbar-fa"></i>
+            
           </Link>
         </Nav>
 
         <Nav>
           {user ? (
             <>
-            
+            <Link className="nav-link nav-view-cart" to="/cart">
+              View Cart
+            </Link>
+              
+              <Link to="/editprofile" className="nav-link">
+                <i className="fas fa-user-circle navbar-fa"></i>
+                </Link>
               <Link to="/editprofile" className="nav-link">
                 {user.fullName}
               </Link>
               <Link onClick={logout} to="/logout" className="nav-link">
-                Logout
+                Log Out
               </Link>
             </>
           ) : (
             <>
               <Link to="/login" className="nav-link">
-                Login
+                Log In
               </Link>
               {/* <Link to="/register" className="nav-link">
                 Register

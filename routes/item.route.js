@@ -4,22 +4,22 @@ const checkToken = require("../config/config")
 const Axios = require('axios')
 const cheerio = require("cheerio")
 
-router.get('/:id', async(req,res) => {
-    try{
-        let item = await Item.findById(req.params.id)
-        res.status(200).json({
-            message: "item found",
-            item,
-        })
-    }catch(err){
-        console.log(err)
-        res.status(500).json({
-            message: 'failed to retrieve item',
-            statuscode: 'EB500'
-        })
-    }
+// router.get('/:id', async(req,res) => {
+//     try{
+//         let item = await Item.findById(req.params.id)
+//         res.status(200).json({
+//             message: "item found",
+//             item,
+//         })
+//     }catch(err){
+//         console.log(err)
+//         res.status(500).json({
+//             message: 'failed to retrieve item',
+//             statuscode: 'EB500'
+//         })
+//     }
 
-})
+// })
 /*
 @route GET api/items/:id
 @desc Gets one items
@@ -73,30 +73,30 @@ router.get('/:id', async(req,res) => {
 */
 
 
-router.post('/',  async(req,res) => {
-    try{
-        // let items = await Item.find()
-        let item = new Item(req.body);
+// router.post('/',  async(req,res) => {
+//     try{
+//         // let items = await Item.find()
+//         let item = new Item(req.body);
         
-        // if(item.name)
-        let savedItem = await item.save()
+//         // if(item.name)
+//         let savedItem = await item.save()
 
-        res.status(201).json({
-            message: "chen gong"
-        });
+//         res.status(201).json({
+//             message: "chen gong"
+//         });
 
 
-        // res.status(200).json({
-        //     count: items.length,
-        //     items,
-        // })
-    }catch(err){
-        res.status(500).json({
-            message: "fail in chinese",
-            statuscode: "EB500"
-        })
-    }
-})
+//         // res.status(200).json({
+//         //     count: items.length,
+//         //     items,
+//         // })
+//     }catch(err){
+//         res.status(500).json({
+//             message: "fail in chinese",
+//             statuscode: "EB500"
+//         })
+//     }
+// })
 /*
 @route GET api/items
 @desc Gets all items

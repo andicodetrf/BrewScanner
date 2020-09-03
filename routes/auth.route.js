@@ -45,12 +45,6 @@ router.post('/register', async(req,res) => {
                         token});
                 }
             );
-        
-        
-        // }
-
-
-       
 
     }catch(err) {
 

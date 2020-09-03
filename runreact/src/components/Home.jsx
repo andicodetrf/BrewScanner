@@ -38,9 +38,6 @@ class Home extends Component {
           .then((res) => {
             console.log(res.data);
 
-            // let toStore = res.data.items.map((eachItem) => eachItem["purchased"] = 0)
-            // this.setState({ items: toStore});
-
             this.setState({ items: res.data.items});
 
             localStorage.setItem("items", JSON.stringify(res.data.items))
@@ -177,15 +174,13 @@ class Home extends Component {
         } 
 
         if(this.state.highestToggle){ 
-          let temp = [...this.state.items]
-          temp.sort((a,b) => Number(b.itemPrice) - Number(a.itemPrice))
-          console.log(temp)
-          this.setState({
-            displaySort: temp, 
-          })
-        
-        } 
-      
+            let temp = [...this.state.items]
+            temp.sort((a,b) => Number(b.itemPrice) - Number(a.itemPrice))
+            console.log(temp)
+            this.setState({
+              displaySort: temp, 
+            })
+          } 
         }
 
         clearSortHandler = () => {
@@ -201,54 +196,32 @@ class Home extends Component {
           this.setState({currentPage: pgNum})
         }
 
-    mainAddToCart = (item) => {
-      this.props.addToCart(item)
-    }
-
-        addToCart = (e) => {
-          
-          console.log(e.target.id)
-          let temp = [...this.state.items]
-          let foundItem = temp.find(f => f.itemID === e.target.id)
-          // console.log(foundItem)
-          let foundItemIndex = temp.findIndex(f => f.itemID === e.target.id)
-          console.log('item index', foundItemIndex)
-
-
-          if(foundItem.itemQty){
-            
-            foundItem.itemQty = foundItem.itemQty - 1 
-            
-            let addItem = [...this.state.cart];
-
-            addItem.push(foundItem)
-
-            this.setState({cart: addItem})
-
-            temp.splice(foundItemIndex, foundItem)
-            console.log(temp)
-            this.setState({items: temp})
-            
-            
-            // localStorage.setItem("cart", JSON.stringify(cart))
-
-
-            }
-            
-            // const exist = this.state.cart.some(el => el.itemID === foundItem.itemID)
-
-            // if(exist){
-            //   temp.items[id].ordered = temp.items[id].ordered + 1
-            // } else {
-            //   temp.cart.push(temp.items[id])
-            //   temp.items[id].ordered = 1
-            // }
-
-          
-
-          
-
+        mainAddToCart = (item) => {
+          this.props.addToCart(item)
         }
+
+        // addToCart = (e) => {
+          
+        //   console.log(e.target.id)
+        //   let temp = [...this.state.items]
+        //   let foundItem = temp.find(f => f.itemID === e.target.id)
+        //   // console.log(foundItem)
+        //   let foundItemIndex = temp.findIndex(f => f.itemID === e.target.id)
+        //   console.log('item index', foundItemIndex)
+
+        //   if(foundItem.itemQty){
+        //     foundItem.itemQty = foundItem.itemQty - 1 
+        //     let addItem = [...this.state.cart];
+
+        //     addItem.push(foundItem)
+        //     this.setState({cart: addItem})
+
+        //     temp.splice(foundItemIndex, foundItem)
+        //     console.log(temp)
+        //     this.setState({items: temp})
+        //     }
+
+        // }
 
     render() {
       // console.log("Home: ",this.props)
@@ -384,18 +357,14 @@ class Home extends Component {
                                         <div>
                                         ${item.itemPrice}
                                         </div>
-                                        <div>
-                                        Stock: {item.itemQty}
-                                        </div>
                                         {/* <div>
-                                        From: {item.itemFrom}
+                                        Stock: {item.itemQty}
                                         </div> */}
                                         <div>
                                           <a href={item.itemOriURL}>Visit {item.itemFrom}</a>
                                         </div>
                                     </Card.Body>
                                     <Card.Footer className="text-right">
-                                        {/* <a href="#" className="btn btn-outline-warning"></a> */}
                                           <i className="fas fa-cart-plus indi-cart" onClick={() => this.mainAddToCart(item)} id={item.itemID}></i>
                                     </Card.Footer>
                                     

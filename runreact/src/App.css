@@ -149,9 +149,22 @@ html{
   background-color: rgb(45,51,56);
   color: white;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 15px;
   height: 50px;
+  font-size: 13px;
 }
+
+.site-footer a{
+  color: white;
+  text-decoration: none;
+}
+
+.site-footer a:hover, .fa-heart:hover{
+  color: orange;
+  text-decoration: none;
+}
+
+
 
 .overall{
   min-height: 95vh;
@@ -213,5 +226,30 @@ html{
   background-image: linear-gradient(rgba(255, 255, 255, 0.002), rgba(255, 255, 255, 0.002) 85%, rgba(255, 255, 255, 0.002)) !important;
   background: red !important;
   
+}
+
+.navbar-fa{
+  font-size: 30px;
+  color: #d3d3d3
+}
+
+.fa-user-circle{
+  margin-top: -2px;
+  margin-right: -5px;
+  
+}
+
+.fa-home:hover, .fa-user-circle:hover{
+  color: #e4e4e4;
+}
+
+#navlogo{
+  margin-top: -10px;
+  margin-right: 10px;
+}
+
+
+.nav-view-cart{
+  margin-right: 15px;
 }
 

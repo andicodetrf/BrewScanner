@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Container, Row, Button, Col, Badge } from "react-bootstrap";
+import { Card, Container, Row, Col, Badge } from "react-bootstrap";
 import StripeCheckout from 'react-stripe-checkout'
 import Axios from 'axios'
 import {toast} from 'react-toastify'
@@ -29,53 +29,45 @@ class CartInfo extends Component {
     }
 
     removeItemFromCart = (item) => {
-
+        
+        let itemQtyBeforeRemove = item.quantity;
+        // console.log('before remove', item.quantity)
         this.props.removeItemCart(item)
          
         let totalCost = this.state.totalCost - item.itemPrice
 
-        // let updatedOrder = this.props.cart.filter(el => el.itemID !== item.itemID)
-        // console.log(updatedOrder)
 
         let updatedOrder;
-        console.log('a1', item.quantity)
-        if(item.quantity > 1){
-            // item.quantity = item.quantity - 1
-            
-            // let toDDTIndex = this.state.order.findIndex(el => el.itemID === item.itemID)
+        console.log('after remove', item.quantity)
+        if(itemQtyBeforeRemove > 1){
 
-            // console.log('a1', item)
-            // let temp = [...this.state.order]
-            // updatedOrder = temp.splice(toDDTIndex, 1, item)
-            // console.log('a2', item)
             updatedOrder = this.props.cart
-
 
         } else if (item.quantity === 1) {
             updatedOrder = this.props.cart.filter(el => el.itemID !== item.itemID)
-            console.log('b')
+            // console.log('b')
         }
-        console.log('c', this.state.order)
-        console.log('c', updatedOrder)
+        // console.log('c', this.state.order)
+        // console.log('c', updatedOrder)
         this.setState({totalCost: totalCost.toFixed(2), order: updatedOrder})
         
     }
 
     async handleToken(token){
-        // let {order} = this.state
+        // let {order:{itemFrom, itemName, itemID, itemPrice, itemUnit, quantity}} = this.state
         // console.log({token, addresses})
         const response = await Axios.post(`${URL}/checkout`, {
             token, 
             // order
         })
 
-        const {status} = response.data
-        if( status = "success"){
+        let {status} = response.data
+        if( status === "success"){
             toast(
                     'Success! Check email for details',
                     {type: 'success'}
                 )
-        } else{
+        } else {
             toast(
                     "Ooops! It didn't go through",
                     {type: 'error'}
