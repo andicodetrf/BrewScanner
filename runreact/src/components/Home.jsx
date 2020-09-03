@@ -60,6 +60,7 @@ class Home extends Component {
       if(items && DaysDiff < 2){
         items = JSON.parse(items)  
         // console.log(DaysDiff) 
+        console.log(localStorage.items);
         this.setState({ items },() => {console.log(this.state.items) });
         
       } else{
