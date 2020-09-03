@@ -349,7 +349,29 @@ class Home extends Component {
                     <h6>Hi in deploy {this.state.searchError}</h6>
                   {
                     currentItemsList.map(item => (
-                    <span>{item.itemName}</span>
+                      <Col key={item.itemID} md="4">
+                      <Card  className="mb-3 shadow mb-5 bg-white rounded" style={{minHeight: "24em"}}>
+                      <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain", }}/>
+                          <Card.Body className="text-sm">
+                              {item.itemName}
+                              <div>
+                              {item.itemUnit}
+                              </div>
+                              <div>
+                              ${item.itemPrice}
+                              </div>
+                              {/* <div>
+                              Stock: {item.itemQty}
+                              </div> */}
+                              <div className="badge badge-dark">
+                                <a className="text-white" href={item.itemOriURL}>{item.itemFrom}</a>
+                              </div>
+                          </Card.Body>
+                          <Card.Footer className="text-right">
+                                <i className="fas fa-cart-plus indi-cart" onClick={() => this.mainAddToCart(item)} id={item.itemID}></i>
+                          </Card.Footer>                                   
+                      </Card>
+                  </Col>
                     ))
                   }
                   
