@@ -61,7 +61,8 @@ class Home extends Component {
         items = JSON.parse(items)  
         // console.log(DaysDiff) 
         console.log(localStorage.items);
-        this.setState({ items },() => {console.log(this.state.items) });
+        this.setState({ items })
+        
         
       } else{
         this.fetchItems();
@@ -243,7 +244,7 @@ class Home extends Component {
       }
 
       //---- end for pagination
-      
+      console.log("state now: ",this.state.items)
         return (
           <div className="home-page">
             <div className="home-main" >
