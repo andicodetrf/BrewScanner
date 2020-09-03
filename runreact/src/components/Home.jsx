@@ -245,6 +245,8 @@ class Home extends Component {
 
       //---- end for pagination
       console.log("state now: ",this.state.items)
+      console.log("current items list", currentItemsList)
+      console.log("displayList", displayList)
         return (
           <div className="home-page">
             <div className="home-main" >
