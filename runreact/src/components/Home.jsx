@@ -347,7 +347,11 @@ class Home extends Component {
                   
                   <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px transparent"}} >
                     <h6>Hi in deploy {this.state.searchError}</h6>
-                  { "something here"
+                  {
+                    currentItemsList.map(item => (
+                    // displayList.map(item => (
+                    <span>{item.itemName}</span>
+                    ))
                   }
                   
 
