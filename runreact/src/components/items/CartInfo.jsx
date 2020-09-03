@@ -3,6 +3,7 @@ import { Card, Container, Row, Col, Badge } from "react-bootstrap";
 import StripeCheckout from 'react-stripe-checkout'
 import Axios from 'axios'
 import {toast} from 'react-toastify'
+import {Link} from 'react-router-dom'
 // import {Elements} from '@stripe/react-stripe-js';
 // import {loadStripe} from '@stripe/stripe-js';
 // import CheckoutForm from './CheckoutForm';
@@ -164,7 +165,7 @@ class CartInfo extends Component {
                             />
 
                             <div className="mt-2">
-                            <a href="#" className="btn btn-outline-success shadow-sm rounded submit-order" onClick={this.submitTransactHandler}>Submit Order</a>
+                            <Link to="/" className="btn btn-outline-success shadow-sm rounded submit-order" onClick={this.submitTransactHandler}>Submit Order</Link>
                             </div>
 
                         {/* <Elements stripe={stripePromise}>

@@ -38,14 +38,14 @@ class OrderHistory extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{background:"darkslategrey", height:"89vh"}}>
                 <Container>
-                <h3 className="text-center my-5">Order History</h3>
+                <h3 className="text-center text-white pt-5 pb-3">Order History</h3>
 
                 {(this.state.orderHistory.length > 0) ? 
                 
                     this.state.orderHistory.map((h,idx) => 
-                        <Card key={idx}>
+                        <Card key={idx} className="mb-3">
                             <Card.Header>
                             <Badge variant="success" style={{fontSize: "15px", marginRight: "5px"}}>Paid on {h.createdAt.substring(0,10)}</Badge>
                                 <Badge variant="danger" style={{fontSize: "15px"}}>Total : ${h.orderTotal.toFixed(2)}</Badge>
