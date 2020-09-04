@@ -14,7 +14,6 @@ import OrderHistory from "./components/user/OrderHistory";
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing";
 import Axios from "axios";
-// import AddItem from "./components/items/AddItem";
 import { decode } from "jsonwebtoken";
 import PrivateRoute from "./components/PrivateRoute";
 import { Alert } from "react-bootstrap";
@@ -95,7 +94,7 @@ class App extends Component{
       });
 
      
-      console.log(temp)
+      // console.log(temp)
       // 
       //
       //
@@ -142,7 +141,7 @@ class App extends Component{
         if(localStorage.getItem('cart') != null){
           let cart = JSON.parse(localStorage.cart) //convert from string to object
           let sum = 0
-          console.log(cart.cart.length)
+          // console.log(cart.cart.length)
           for(let x = 0; x < cart.cart.length; x++){
               sum+= cart.cart[x].quantity
           }
@@ -190,8 +189,8 @@ class App extends Component{
   loginHandler = (credentials) => {
     Axios.post(`${URL}/auth/login`, credentials)
     .then((res) => {
-      console.log('cred', credentials)
-        console.log('res data', res.data)
+      // console.log('cred', credentials)
+        // console.log('res data', res.data)
         localStorage.setItem("token", res.data.token)
 
         this.getUserProfile(res.data.token);
@@ -215,7 +214,7 @@ class App extends Component{
     //login here
     Axios.post(`${URL}/auth/register`, credentials)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
         localStorage.setItem("token", res.data.token);
         this.getUserProfile(res.data.token);
@@ -290,7 +289,6 @@ class App extends Component{
         <PrivateRoute exact path="/cart" isAuth={isAuth} removeItemCart={this.removeToCart} clearCart={this.clearTransaction} cart={this.state.cart} addToCart={this.addToCart} component={CartInfo} /> 
         
           <PrivateRoute
-            // user={user}
             exact
             path="/editprofile"
             isAuth={isAuth}
@@ -298,22 +296,12 @@ class App extends Component{
           />
 
           <PrivateRoute
-            // user={user}
             exact
             path="/orderHistory"
             isAuth={isAuth}
             component={OrderHistory}
           />
 
-
-          {/* <Route path="/item/add" exact render={() => <AddItem />} /> */}
-          {/* <PrivateRoute
-            exact
-            path="/item/:id"
-            isAuth={isAuth}
-            component={Item}
-          /> */}
-          {/* <Route path="/item/:id" component={Item} /> */}
           <Route
             path="/register"
             exact
@@ -338,7 +326,8 @@ class App extends Component{
         </Switch>
         </div>
         <footer className="site-footer">
-          Made with <i className="fas fa-heart"></i> - <a href="https://www.linkedin.com/in/andrea-lau-al/">Andi L</a> <a href="https://github.com/andicodetrf/BrewScanner"><i className="fab fa-github"></i></a> 
+          Made with <i className="fas fa-heart"></i> - Andi L
+          <a href="https://www.linkedin.com/in/andrea-lau-al/"><i className="fab fa-linkedin"></i></a> <a href="https://github.com/andicodetrf/BrewScanner"><i className="fab fa-github"></i></a>
         </footer>
         
       </Router>

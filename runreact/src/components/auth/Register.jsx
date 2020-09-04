@@ -43,7 +43,7 @@ export default class Register extends Component {
         // console.log(maxDate)
 
         return (
-            <div>
+            <div className="log-reg-cart-bg">
                 {(this.state.regError.length>0) && <Alert variant="danger">{this.state.regError}</Alert>}
 
                 <Container>
@@ -52,7 +52,7 @@ export default class Register extends Component {
                 <Col md="8">
 
                 <Row className="mb-4 mt-4">
-                <h1>Registration</h1>
+                <h3>Registration</h3>
                 </Row>
 
                 <Form>
@@ -112,13 +112,13 @@ export default class Register extends Component {
                         onChange={this.changeHandler}
                         required
                     />
-                    <small class="form-text text-muted">Required. 5 characters minimum</small>
+                    <small className="form-text text-muted">Required. 5 characters minimum</small>
                 </Row>
                 
 
                
-                <Row className="mb-4">
-                <Button variant="dark" block onClick={this.childSignUpHandler}>
+                <Row className="mb-5">
+                <Button variant="info" block onClick={this.childSignUpHandler}>
                     {" "}
                     Register</Button>
                 </Row>
@@ -127,8 +127,6 @@ export default class Register extends Component {
                 </Col>
                 </Row>
 
-                {/* <input type="text" required/>
-                <input type="submit" value="submit"/> */}
                 </Container>
             </div>
         )

@@ -89,8 +89,6 @@ class EditProfile extends Component {
             bd = `${day} ${month} ${year}`
         }
 
-        console.log(year)
-        console.log(bd)
 
         return (
             <div className="element-outer">

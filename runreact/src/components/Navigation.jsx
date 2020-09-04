@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import bottlecheers from './navImg/bottlecheers.png'
-import mugbottle from './navImg/mugbottle.png'
+// import mugbottle from './navImg/mugbottle.png'
 
 function Navigation({ user, logout }) {
     // console.log(user)
@@ -31,7 +31,7 @@ function Navigation({ user, logout }) {
             </Link>
 
             <Link to="/orderHistory" className="nav-link">
-              <i class="fas fa-history"></i>
+              <i className="fas fa-history"></i>
               </Link>
               
               <Link to="/editprofile" className="nav-link">
@@ -49,9 +49,6 @@ function Navigation({ user, logout }) {
               <Link to="/login" className="nav-link">
               <div className="nav-items-hover">Log In</div>
               </Link>
-              {/* <Link to="/register" className="nav-link">
-                Register
-              </Link> */}
             </>
           )}
         </Nav>

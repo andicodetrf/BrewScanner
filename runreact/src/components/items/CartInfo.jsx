@@ -44,17 +44,15 @@ class CartInfo extends Component {
 
 
         let updatedOrder;
-        console.log('after remove', item.quantity)
+        
         if(itemQtyBeforeRemove > 1){
 
             updatedOrder = this.props.cart
 
         } else if (item.quantity === 1) {
             updatedOrder = this.props.cart.filter(el => el.itemID !== item.itemID)
-            // console.log('b')
         }
-        // console.log('c', this.state.order)
-        // console.log('c', updatedOrder)
+        
         this.setState({totalCost: totalCost.toFixed(2), order: updatedOrder})
         
     }
@@ -95,7 +93,7 @@ class CartInfo extends Component {
               })
             .then((res) => {
               console.log("order submitted to server");
-            //   this.props.clearCart()
+            
             this.clearCartHandler()
              
             })
@@ -113,7 +111,7 @@ class CartInfo extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{background: "rgb(240, 240, 240)", height: "89vh"}}>
                 <Container>
                     <Row>
                         <Col md="8">
@@ -154,6 +152,7 @@ class CartInfo extends Component {
 
                         <Col md="4">
                             <div className="text-center my-5">
+                            
                             <StripeCheckout
                                 stripeKey={`${reactStripeKey}`}
                                 token={this.handleToken}
@@ -163,14 +162,12 @@ class CartInfo extends Component {
                                 orderTotal={this.state.order}
                                 
                             />
+                            
 
                             <div className="mt-2">
                             <Link to="/" className="btn btn-outline-success shadow-sm rounded submit-order" onClick={this.submitTransactHandler}>Submit Order</Link>
                             </div>
 
-                        {/* <Elements stripe={stripePromise}>
-                            <CheckoutForm />
-                        </Elements> */}
 
                             </div>
                         </Col>

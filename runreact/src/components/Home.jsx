@@ -60,7 +60,7 @@ class Home extends Component {
       if(items && DaysDiff < 2){
         items = JSON.parse(items)  
         // console.log(DaysDiff) 
-        console.log(localStorage.items);
+        // console.log(localStorage.items);
         this.setState({ items })
         
         
@@ -169,7 +169,7 @@ class Home extends Component {
         if(this.state.lowestToggle){
           let temp = [...this.state.items]
           temp.sort((a,b) => Number(a.itemPrice) - Number(b.itemPrice))
-          console.log(temp)
+          
           this.setState({
             displaySort : temp,
           })
@@ -178,7 +178,7 @@ class Home extends Component {
         if(this.state.highestToggle){ 
             let temp = [...this.state.items]
             temp.sort((a,b) => Number(b.itemPrice) - Number(a.itemPrice))
-            console.log(temp)
+            
             this.setState({
               displaySort: temp, 
             })
@@ -226,7 +226,7 @@ class Home extends Component {
         // }
 
     render() {
-      console.log("Home: ")
+      // console.log("Home: ")
       const displayList = 
       (this.state.isFilterSupp && this.state.searchKey === "") ? this.state.suppFilteredList :  
           ((this.state.filteredList.length > 0) ? this.state.filteredList : (this.state.displaySort.length> 0 ? this.state.displaySort :  this.state.items ))
@@ -244,9 +244,9 @@ class Home extends Component {
       }
 
       //---- end for pagination
-      console.log("state now: ",this.state.items)
-      console.log("current items list", currentItemsList)
-      console.log("displayList", displayList)
+      // console.log("state now: ",this.state.items)
+      // console.log("current items list", currentItemsList)
+      // console.log("displayList", displayList)
         return (
           <div className="home-page">
             <div className="home-main" >
@@ -266,7 +266,6 @@ class Home extends Component {
                       
                     
                       <nav style={{display: "flex"}}>
-                      {/* <a href="#" className="btn btn-outline-warning mr-2 mb-3" ></a> */}
 
                           <Link to="/cart">
                           <div className="view-cart">

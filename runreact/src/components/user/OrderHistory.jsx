@@ -57,7 +57,7 @@ class OrderHistory extends Component {
                                 )}
                             </Card.Body>
                         </Card>
-                        // <li>{h.orderTotal}</li>
+                        
                     )
                         : null
             

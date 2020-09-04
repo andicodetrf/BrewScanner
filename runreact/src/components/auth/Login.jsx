@@ -16,21 +16,21 @@ export default class Login extends Component {
 
 
     childLoginHandler = () => {
-        console.log(this.state)
+        // console.log(this.state)
         this.props.login(this.state)
     }
 
 
     render() {
         return (
-            <div className="login-main">
+            <div className="log-reg-cart-bg">
                 
                 <Container>
                 <Row className="justify-content-md-center">
                 <Col md="5">
                 
                 <Row className="mb-4 mt-4">
-                <h1>Login</h1>
+                <h3>Log In</h3>
                 </Row>
                 <Row className="mb-4">
                 <Form.Label>Email</Form.Label>
@@ -53,7 +53,7 @@ export default class Login extends Component {
                 <Row>
                 <Button className="mt-3" variant="warning" block onClick={this.childLoginHandler}>
                     {" "}
-                    Login</Button>
+                    Log In</Button>
 
                 
                 </Row>
