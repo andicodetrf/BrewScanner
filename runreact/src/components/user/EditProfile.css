@@ -2,8 +2,11 @@
 
 .element-outer{
     background-color:#d6d6d6;
-    height: 89vh;
-    padding: 30px;
+    min-height: 100vh;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
   }  
   
 
@@ -53,4 +56,6 @@ background: #4b5053;
 box-shadow:  20px 20px 60px #404447, 
              -20px -20px 60px #565c5f; */
 
-
+/* .edit-address{
+  margin-bottom: 20px;
+} */

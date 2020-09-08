@@ -23,7 +23,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="log-reg-cart-bg">
+            <div className="log-reg">
                 
                 <Container>
                 <Row className="justify-content-md-center">

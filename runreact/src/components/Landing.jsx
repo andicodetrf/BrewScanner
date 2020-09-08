@@ -86,15 +86,21 @@ class Landing extends Component {
 
                     <section className="arrow animate__animated animate__fadeInDown">
 
-                    <a href="#age-sect-id" className=""><i className="fas fa-angle-down fa-5x"></i></a>
+                    <a href="#age-sect-id" className="">
+                        <i class="fas fa-chevron-circle-down fa-4x"></i>
+                        </a>
 
                     </section>
 
                 </div>
 
                 <section className="age-section" id="age-sect-id">
-                    <div className="badge badge-danger py-2 px-2 checkbox">
-                        <input type="checkbox" name="checkAge" onChange={this.changeHandler}/> Are you above 18?
+
+                    <div className="checkbox">
+                        <div className="form-group form-check">
+                            <input type="checkbox" className="form-check-input" name="checkAge" onChange={this.changeHandler}/>
+                            <label className="form-check-label">Are you 18 or above?</label>
+                        </div>
                     </div>
 
                     <div  id="eligible-reg">

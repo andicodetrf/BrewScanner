@@ -43,7 +43,7 @@ export default class Register extends Component {
         // console.log(maxDate)
 
         return (
-            <div className="log-reg-cart-bg">
+            <div className="log-reg">
                 {(this.state.regError.length>0) && <Alert variant="danger">{this.state.regError}</Alert>}
 
                 <Container>

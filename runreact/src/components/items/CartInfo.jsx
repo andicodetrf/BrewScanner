@@ -111,7 +111,7 @@ class CartInfo extends Component {
     render() {
 
         return (
-            <div style={{background: "rgb(240, 240, 240)", height: "89vh"}}>
+            <div style={{background: "rgb(240, 240, 240)", minHeight:"100vh", paddingBottom: "20px"}}>
                 <Container>
                     <Row>
                         <Col md="8">

@@ -264,11 +264,10 @@ class Home extends Component {
 
                     <Col md="5" id="page-btn">
                       
-                    
-                      <nav style={{display: "flex"}}>
+             
 
                           <Link to="/cart">
-                          <div className="view-cart">
+                          <div className="view-cart shadow rounded">
                             
                           <i className="fas fa-cart-plus"></i>
                               <span className="badge badge-danger ml-2">{this.props.cartItemTotal}</span>
@@ -277,17 +276,17 @@ class Home extends Component {
                             </Link>
                             
                       
-                        <ul className="pagination shadow-sm transparent rounded">
+                        <ul className="pagination shadow rounded">
                           {totalPages.map((pg,idx) => (
                           
-                            <li key={pg}  className="page-item ">
-                                <a className="page-link text-secondary" href="#name" onClick={()=>this.paginate(pg)}> {pg}</a>
+                            <li key={pg}  className="page-item">
+                                <a className="page-link text-warning bg-dark" href={`#${pg}`} onClick={()=>this.paginate(pg)}> {pg}</a>
                             </li>
                           )
                             
                         )}
                         </ul>
-                      </nav>
+                      
                       </Col>
 
                   </Row>
@@ -343,39 +342,49 @@ class Home extends Component {
                   </Col>
 
                   <Col md="10">
-                  
-                  <Row className="row-cols-1 row-cols-md-3" style={{border:"solid 2px transparent"}} >
-                  { (this.state.searchError) ? this.state.searchError :
-                    currentItemsList.map(item => (
-                      <Col key={item.itemID} md="4">
-                      <Card  className="mb-3 shadow mb-5 bg-white rounded" style={{minHeight: "24em"}}>
-                      <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain", }}/>
-                          <Card.Body className="text-sm">
-                              {item.itemName}
-                              <div>
-                              {item.itemUnit}
-                              { /* this is a comment */ }
-                              </div>
-                              <div>
-                              ${item.itemPrice}
-                              </div>
-                              {/* <div>
-                              Stock: {item.itemQty}
-                              </div> */}
-                              <div className="badge badge-dark">
-                                <a className="text-white" href={item.itemOriURL}>{item.itemFrom}</a>
-                              </div>
-                          </Card.Body>
-                          <Card.Footer className="text-right">
-                                <i className="fas fa-cart-plus indi-cart" onClick={() => this.mainAddToCart(item)} id={item.itemID}></i>
-                          </Card.Footer>                                   
-                      </Card>
-                  </Col>
-                    ))
-                  }
-                  
 
+                  {(currentItemsList.length === 0 && !this.state.searchError ) ? 
+
+                    <div className="text-center">
+                      <div class="loadingio-spinner-magnify-y0rd43cs3y"><div class="ldio-crwqkptrn5">
+                      <div><div><div></div><div></div></div></div>
+                      </div></div>
+                    </div>
+                  : 
+                  
+                  <Row className="row-cols-1 row-cols-md-3">
+                  
+                    {(this.state.searchError) ? this.state.searchError :
+                      currentItemsList.map(item => (
+                        <Col key={item.itemID} md="4">
+                        <Card  className="mb-3 shadow mb-5 bg-white rounded" style={{minHeight: "24em"}}>
+                        <Card.Img variant="top" src={item.itemImgURL} height="200px" style={{objectFit:"contain", }}/>
+                            <Card.Body className="text-sm">
+                                {item.itemName}
+                                <div>
+                                {item.itemUnit}
+                                { /* this is a comment */ }
+                                </div>
+                                <div>
+                                ${item.itemPrice}
+                                </div>
+                                {/* <div>
+                                Stock: {item.itemQty}
+                                </div> */}
+                                <div className="badge badge-dark">
+                                  <a className="text-white" href={item.itemOriURL}>{item.itemFrom}</a>
+                                </div>
+                            </Card.Body>
+                            <Card.Footer className="text-right">
+                                  <i className="fas fa-cart-plus indi-cart" onClick={() => this.mainAddToCart(item)} id={item.itemID}></i>
+                            </Card.Footer>                                   
+                        </Card>
+                    </Col>
+                      ))
+                    }
+                  
                   </Row>
+                  }
                   
                   </Col>
                   </Row>

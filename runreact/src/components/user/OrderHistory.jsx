@@ -38,7 +38,7 @@ class OrderHistory extends Component {
 
     render() {
         return (
-            <div style={{background:"darkslategrey", height:"89vh"}}>
+            <div style={{background:"darkslategrey", minHeight:"100vh", paddingBottom: "50px"}}>
                 <Container>
                 <h3 className="text-center text-white pt-5 pb-3">Order History</h3>
 
