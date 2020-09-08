@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Item = require('../model/item.model');
+// const Item = require('../model/item.model');
 const checkToken = require("../config/config")
 const Axios = require('axios')
 const cheerio = require("cheerio")

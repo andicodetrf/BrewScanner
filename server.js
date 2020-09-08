@@ -19,7 +19,7 @@ app.use(express.json()) // allows me to receive JSON files from HEADER of REQUES
 app.use('/api/items', require('./routes/item.route'))
 app.use('/api/auth', require('./routes/auth.route'))
 app.use('/api/transaction', require('./routes/transaction.route'))
-app.use(express.static("runreact/build"))
+app.use(express.static("runreact/build")) //for deployment
 
 
 //===== 404 errors
