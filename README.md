@@ -8,9 +8,11 @@ Stocking up for beer-o'clock at home? Find the cheapest beer deals for out there
 <!-- ### Motivation -->
 
 ### User Stories
-- As a [bar-goer who prefer to stay home during Covid-19 pandemic], I'd like [stock up on beer] so that [I could still hold happy hours with some friends at home]
-- As a [person that shops online], I'd want to [view listings of cheapest deals and product varieties without having to visit the supplying online stores / online supermarkets separately] so I can [compare product prices within the same site]
-- As a [person that shops online], I'd like to [add and purchase products from different suppliers (eg. FairPrice & Cold Storage) under a single transaction] so [I do not need to go to each supplier's online store to make my purchase]
+    As a [bar-goer who prefer to stay home during Covid-19 pandemic], I'd like [stock up on beer] so that [I could still hold happy hours with some friends at home]
+
+    As a [person that shops online], I'd want to [view listings of cheapest deals and product varieties without having to visit the supplying online stores / online supermarkets separately] so I can [compare product prices within the same site]
+    
+    As a [person that shops online], I'd like to [add and purchase products from different suppliers (eg. FairPrice & Cold Storage) under a single transaction] so [I do not need to go to each supplier's online store to make my purchase]
 
 ### Site Usage
 - As a visitor that is 18 years old or above, you are eligible to register for an account and sign in to view product listing
