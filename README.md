@@ -8,8 +8,8 @@ Stocking up for beer-o'clock at home? Find the cheapest beer deals for out there
 <!-- ### Motivation -->
 
 ### User Stories
-    As a **[bar-goer who prefer to stay home during Covid-19 pandemic]**, 
-    I'd like **[stock up on beer]**
+    As a <b>[bar-goer who prefer to stay home during Covid-19 pandemic]<b>, 
+<pre>I'd like <b>[stock up on beer]<b><pre>
     so that **[I could still hold happy hours with some friends at home]**
 
     As a **[person that shops online]**, 
