@@ -45,14 +45,17 @@ Stocking up for beer-o'clock at home? Find the cheapest beer deals for out there
 
 
 ### Wireframe 
-<img src="MDfiles/BTwireframe.png">
+<img src="MDfiles/BSwireframe.png">
 
 <!-- ### ERD -->
 <!-- <img src="MDfiles/sketchmodel.jpg"> -->
 
-#### Product
-<img src="MDfiles/BSInnerGIFR2.gif">
+### Product
+#### Landing Page (Before Login)
 <img src="MDfiles/BSLandingGIFR2.gif">
+
+#### Home Page (After Login)
+<img src="MDfiles/BSInnerGIFR2.gif">
 
 
 ### MVP 
