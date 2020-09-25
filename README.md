@@ -12,15 +12,15 @@ Stocking up for beer-o'clock at home? Find the cheapest beer deals for out there
 I'd like to <b>stock up on beer</b>
 so that <b>I could still hold happy hours with some friends at home</b></pre>
 
-<pre>As a <b>[person that shops online]</b>, 
-I'd want to <b>[view listings of cheapest deals and product varieties without 
+<pre>As a <b>person that shops online</b>, 
+I'd want to <b>view listings of cheapest deals and product varieties without 
 having to visit the respective online grocery retailers</b> 
-so I can <b>[compare product prices within the same site]</b></pre>
+so I can <b>compare product prices within the same site</b></pre>
 
-<pre>As a <b>[person that shops online]</b>, 
-I'd like to <b>[order and purchase products from different suppliers (eg. FairPrice & Cold Storage) 
-under a single transaction]</b>
-so <b>[I do not need to go to each supplier's online store to make my purchase]</b></pre>
+<pre>As a <b>person that shops online</b>, 
+I'd like to <b>order and purchase products from different suppliers (eg. FairPrice & Cold Storage) 
+under a single transaction</b>
+so <b>I do not need to go to each supplier's online store to make my purchase</b></pre>
 
 ### Site Usage
 - As a visitor that is 18 years old or above, you are eligible to register for an account and sign in to view product listing
