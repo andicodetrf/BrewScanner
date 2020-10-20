@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Row, Form, Button, Container, Col} from 'react-bootstrap'
+import {Row, Form, Button, Container, Col, Card} from 'react-bootstrap'
 // import axios from 'axios'
 
 // const URL = process.env.REACT_APP_URL
@@ -55,8 +55,19 @@ export default class Login extends Component {
                     {" "}
                     Log In</Button>
 
+                    </Row>
                 
-                </Row>
+                    <Card className="mt-5 shadow mb-3 bg-dark text-white rounded text-center" style={{width: "100%"}}>
+                        <Card.Body>
+                            <h4><u>DEMO Account</u></h4>
+                            <h6>Email: guest@gmail.com</h6>
+                            <h6>Password: happyhour123</h6>
+                        </Card.Body>
+                    </Card>
+                
+
+                
+                
                 </Col>
                 </Row>
                     
